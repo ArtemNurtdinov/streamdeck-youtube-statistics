@@ -1,0 +1,164 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>com.nefrit.youtube.statistics</title>
+    <meta charset="utf-8"/>
+</head>
+
+<body>
+<script>
+
+    var videoId = "Yr_7sd3x-cQ";
+    var apiKey = "";
+
+    var websocket = null;
+    var pluginUUID = null;
+
+    var DestinationEnum = Object.freeze({"HARDWARE_AND_SOFTWARE": 0, "HARDWARE_ONLY": 1, "SOFTWARE_ONLY": 2})
+
+    var timer;
+
+    var viewsAction = {
+
+        type: "com.nefrit.youtube.views",
+
+        onKeyDown: function (context, settings, coordinates, userDesiredState) {
+        },
+
+        onKeyUp: function (context, settings, coordinates, userDesiredState) {
+            clearTimeout(timer);
+
+            var url = "https://www.googleapis.com/youtube/v3/videos?part=statistics&id=" + videoId + "&key=" + apiKey;
+
+            fetch(url)
+                .then(response => response.json())
+                .then(responseJSON => {
+                    const viewCount = responseJSON.items[0].statistics.viewCount;
+                    this.SetTitle(context, viewCount);
+                })
+                .catch(error => {
+                    console.error(error);
+                    this.SetTitle(context, "Ошибка");
+                });
+        },
+
+        onWillAppear: function (context, settings, coordinates) {
+        },
+
+        SetTitle: function (context, keyPressCounter) {
+            var json = {
+                "event": "setTitle",
+                "context": context,
+                "payload": {
+                    "title": "" + keyPressCounter,
+                    "target": DestinationEnum.HARDWARE_AND_SOFTWARE
+                }
+            };
+
+            websocket.send(JSON.stringify(json));
+        },
+    };
+
+    var likesAction = {
+        type: "com.nefrit.youtube.likes",
+
+        onKeyDown: function (context, settings, coordinates, userDesiredState) {
+            timer = setTimeout(function () {
+                counterAction.SetTitle(context, 0);
+            }, 1500);
+        },
+
+        onKeyUp: function (context, settings, coordinates, userDesiredState) {
+            clearTimeout(timer);
+
+            var url = "https://www.googleapis.com/youtube/v3/videos?part=statistics&id=" + videoId + "&key=" + apiKey;
+
+            fetch(url)
+                .then(response => response.json())
+                .then(responseJSON => {
+                    var likesCount = responseJSON.items[0].statistics.likeCount
+
+                    this.SetTitle(context, likesCount);
+                })
+                .catch(error => {
+                    console.error(error);
+                    this.SetTitle(context, "Ошибка");
+                });
+        },
+
+        SetTitle: function (context, keyPressCounter) {
+            var json = {
+                "event": "setTitle",
+                "context": context,
+                "payload": {
+                    "title": "" + keyPressCounter,
+                    "target": DestinationEnum.HARDWARE_AND_SOFTWARE
+                }
+            };
+
+            websocket.send(JSON.stringify(json));
+        },
+    }
+
+    function connectElgatoStreamDeckSocket(inPort, inPluginUUID, inRegisterEvent, inInfo) {
+        pluginUUID = inPluginUUID
+
+        websocket = new WebSocket("ws://127.0.0.1:" + inPort);
+
+        function registerPlugin(inPluginUUID) {
+            var json = {
+                "event": inRegisterEvent,
+                "uuid": inPluginUUID
+            };
+
+            websocket.send(JSON.stringify(json));
+        };
+
+        websocket.onopen = function () {
+            registerPlugin(pluginUUID);
+        };
+
+        websocket.onmessage = function (evt) {
+            var jsonObj = JSON.parse(evt.data);
+            var event = jsonObj['event'];
+            var action = jsonObj['action'];
+            var context = jsonObj['context'];
+
+            var jsonPayload = jsonObj['payload'];
+            var settings = jsonPayload['settings'];
+            var coordinates = jsonPayload['coordinates'];
+            var userDesiredState = jsonPayload['userDesiredState'];
+
+            if (event == "keyDown") {
+                if (action == "com.nefrit.youtube.views") {
+                    viewsAction.onKeyDown(context, settings, coordinates, userDesiredState);
+                }
+                if (action == "com.nefrit.youtube.likes") {
+                    likesAction.onKeyDown(context, settings, coordinates, userDesiredState);
+                }
+            } else if (event == "keyUp") {
+                if (action == "com.nefrit.youtube.views") {
+                    viewsAction.onKeyUp(context, settings, coordinates, userDesiredState);
+                }
+                if (action == "com.nefrit.youtube.likes") {
+                    likesAction.onKeyUp(context, settings, coordinates, userDesiredState);
+                }
+            } else if (event == "willAppear") {
+                if (action == "com.nefrit.youtube.views") {
+                    viewsAction.onWillAppear(context, settings, coordinates);
+                }
+                if (action == "com.nefrit.youtube.likes") {
+                    likesAction.onWillAppear(context, settings, coordinates);
+                }
+            }
+        };
+
+        websocket.onclose = function () {
+        };
+    };
+</script>
+
+</body>
+
+</html>

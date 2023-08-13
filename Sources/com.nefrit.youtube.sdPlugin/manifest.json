@@ -1,0 +1,54 @@
+{
+  "Actions": [
+    {
+      "Icon": "youtube",
+      "Name": "Views",
+      "States": [
+        {
+          "Image": "youtube",
+          "TitleAlignment": "middle", 
+          "FontSize": "16",
+          "YoutubeVideoId": ""
+        }
+      ], 
+      "SupportedInMultiActions": false,
+      "UUID": "com.nefrit.youtube.views"
+    },
+    {
+      "Icon": "youtube",
+      "Name": "Likes",
+      "States": [
+        {
+          "Image": "youtube",
+          "TitleAlignment": "middle",
+          "FontSize": "16",
+          "YoutubeVideoId": ""
+        }
+      ],
+      "SupportedInMultiActions": false,
+      "UUID": "com.nefrit.youtube.likes"
+    }
+  ], 
+  "SDKVersion": 2,
+  "Author": "ArtemNeFRiT",
+  "CodePath": "code.html", 
+  "Description": "Get youtube statistic for your videos.",
+  "Name": "ArtemNeFRiT",
+  "Icon": "youtube",
+  "Version": "1.4",
+  "PropertyInspectorPath": "property_inspector.html",
+  "OS": [
+    {
+        "Platform": "mac", 
+        "MinimumVersion" : "10.11"
+    },
+    {
+        "Platform": "windows", 
+        "MinimumVersion" : "10"
+    }
+  ],
+  "Software": 
+    {
+        "MinimumVersion" : "4.1"
+    }
+}

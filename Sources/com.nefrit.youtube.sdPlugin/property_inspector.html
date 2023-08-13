@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Property Inspector</title>
+</head>
+<body>
+
+<input type="text" id="youtubeVideoIdInput" placeholder="Enter YouTube Video ID"/>
+
+<button id="saveButton">Save</button>
+
+<p id="currentYoutubeVideoId">YouTube Video ID: <span id="currentYoutubeVideoIdValue">-</span></p>
+
+<script>
+    const youtubeVideoIdInput = document.getElementById('youtubeVideoIdInput');
+    const saveButton = document.getElementById('saveButton');
+    saveButton.addEventListener('click', function () {
+        const youtubeVideoId = youtubeVideoIdInput.value;
+        const currentYoutubeVideoId = document.getElementById('currentYoutubeVideoIdValue');
+        currentYoutubeVideoId.textContent = youtubeVideoId;
+    });
+</script>
+</body>
+</html>
