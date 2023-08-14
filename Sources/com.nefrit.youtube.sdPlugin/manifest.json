@@ -7,8 +7,7 @@
         {
           "Image": "youtube",
           "TitleAlignment": "middle", 
-          "FontSize": "16",
-          "YoutubeVideoId": ""
+          "FontSize": "16"
         }
       ], 
       "SupportedInMultiActions": false,
@@ -21,12 +20,24 @@
         {
           "Image": "youtube",
           "TitleAlignment": "middle",
-          "FontSize": "16",
-          "YoutubeVideoId": ""
+          "FontSize": "16"
         }
       ],
       "SupportedInMultiActions": false,
       "UUID": "com.nefrit.youtube.likes"
+    },
+    {
+      "Icon": "youtube",
+      "Name": "Subscribers",
+      "States": [
+        {
+          "Image": "youtube",
+          "TitleAlignment": "middle",
+          "FontSize": "16"
+        }
+      ],
+      "SupportedInMultiActions": false,
+      "UUID": "com.nefrit.youtube.subscribers"
     }
   ], 
   "SDKVersion": 2,
@@ -36,7 +47,7 @@
   "Name": "ArtemNeFRiT",
   "Icon": "youtube",
   "Version": "1.4",
-  "PropertyInspectorPath": "property_inspector.html",
+  "PropertyInspectorPath": "index_pi.html",
   "OS": [
     {
         "Platform": "mac", 

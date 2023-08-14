@@ -9,7 +9,6 @@
 <body>
 <script>
 
-    const videoId = "Yr_7sd3x-cQ";
     const apiKey = "";
 
     let websocket = null;
@@ -17,25 +16,51 @@
 
     const DestinationEnum = Object.freeze({"HARDWARE_AND_SOFTWARE": 0, "HARDWARE_ONLY": 1, "SOFTWARE_ONLY": 2})
 
-    let timer;
-
     const viewsAction = {
         type: "com.nefrit.youtube.views",
 
         onKeyDown: function (context, settings, coordinates, userDesiredState) {
-            timer = setTimeout(function () {
-                viewsAction.SetTitle(context, 0);
-            }, 1500);
         },
 
-        onKeyUp: function (context, settings, coordinates, userDesiredState, videoId) {
-            clearTimeout(timer);
+        onKeyUp: function (context, settings, coordinates, userDesiredState) {
+            var youtubeVideoId = ""
+            if (settings != null && settings.hasOwnProperty('youtubeVideoId')) {
+                youtubeVideoId = settings['youtubeVideoId'];
+            }
 
-            const url = "https://www.googleapis.com/youtube/v3/videos?part=statistics&id=" + videoId + "&key=" + apiKey;
+            console.log('youtubeVideoId', youtubeVideoId)
+            this.UpdateViews(context, youtubeVideoId)
+        },
 
+        onWillAppear: function (context, settings, coordinates) {
+            var youtubeVideoId = ""
+            if (settings != null && settings.hasOwnProperty('youtubeVideoId')) {
+                youtubeVideoId = settings["youtubeVideoId"];
+            }
+            this.UpdateViews(context, youtubeVideoId)
+        },
+
+        SetTitle: function (context, title) {
+            const json = {
+                "event": "setTitle",
+                "context": context,
+                "payload": {
+                    "title": "" + title,
+                    "target": DestinationEnum.HARDWARE_AND_SOFTWARE
+                }
+            };
+
+            websocket.send(JSON.stringify(json));
+        },
+
+        UpdateViews: function (context, youtubeVideoId) {
+            const url = "https://www.googleapis.com/youtube/v3/videos?part=statistics&id=" + youtubeVideoId + "&key=" + apiKey;
+
+            console.log(url)
             fetch(url)
                 .then(response => response.json())
                 .then(responseJSON => {
+                    console.log(responseJSON)
                     const viewCount = responseJSON.items[0].statistics.viewCount;
                     this.SetTitle(context, viewCount);
                 })
@@ -43,9 +68,30 @@
                     console.error(error);
                     this.SetTitle(context, "Ошибка");
                 });
+        }
+    };
+
+    const likesAction = {
+        type: "com.nefrit.youtube.likes",
+
+        onKeyDown: function (context, settings, coordinates, userDesiredState) {
+        },
+
+        onKeyUp: function (context, settings, coordinates, userDesiredState) {
+            var youtubeVideoId = ""
+            if (settings != null && settings.hasOwnProperty('youtubeVideoId')) {
+                youtubeVideoId = settings['youtubeVideoId'];
+            }
+
+            this.UpdateLikes(context, youtubeVideoId)
         },
 
         onWillAppear: function (context, settings, coordinates) {
+            var youtubeVideoId = ""
+            if (settings != null && settings.hasOwnProperty('youtubeVideoId')) {
+                youtubeVideoId = settings["youtubeVideoId"];
+            }
+            this.UpdateLikes(context, youtubeVideoId)
         },
 
         SetTitle: function (context, title) {
@@ -60,32 +106,46 @@
 
             websocket.send(JSON.stringify(json));
         },
-    };
 
-    var likesAction = {
-        type: "com.nefrit.youtube.likes",
+        UpdateLikes: function (context, youtubeVideoId) {
+            const url = "https://www.googleapis.com/youtube/v3/videos?part=statistics&id=" + youtubeVideoId + "&key=" + apiKey;
 
-        onKeyDown: function (context, settings, coordinates, userDesiredState) {
-            timer = setTimeout(function () {
-                likesAction.SetTitle(context, 0);
-            }, 1500);
-        },
-
-        onKeyUp: function (context, settings, coordinates, userDesiredState) {
-            clearTimeout(timer);
-
-            const url = "https://www.googleapis.com/youtube/v3/videos?part=statistics&id=" + videoId + "&key=" + apiKey;
+            console.log(url)
 
             fetch(url)
                 .then(response => response.json())
                 .then(responseJSON => {
-                    const likesCount = responseJSON.items[0].statistics.likeCount;
-                    this.SetTitle(context, likesCount);
+                    const viewCount = responseJSON.items[0].statistics.likeCount;
+                    this.SetTitle(context, viewCount);
                 })
                 .catch(error => {
                     console.error(error);
                     this.SetTitle(context, "Ошибка");
                 });
+        }
+    }
+
+    const subscribersAction = {
+        type: "com.nefrit.youtube.subscribers",
+
+        onKeyDown: function (context, settings, coordinates, userDesiredState) {
+        },
+
+        onKeyUp: function (context, settings, coordinates, userDesiredState) {
+            console.log(settings)
+            var youtubeChannel = ""
+            if (settings != null && settings.hasOwnProperty('youtubeChannel')) {
+                youtubeChannel = settings["youtubeChannel"];
+            }
+            this.UpdateSubscribers(context, youtubeChannel)
+        },
+
+        onWillAppear: function (context, settings, coordinates) {
+            var youtubeChannel = ""
+            if (settings != null && settings.hasOwnProperty('youtubeChannel')) {
+                youtubeChannel = settings["youtubeChannel"];
+            }
+            this.UpdateSubscribers(context, youtubeChannel)
         },
 
         SetTitle: function (context, title) {
@@ -100,7 +160,23 @@
 
             websocket.send(JSON.stringify(json));
         },
-    }
+
+        UpdateSubscribers: function (context, youtubeChannel) {
+            const url = "https://www.googleapis.com/youtube/v3/channels?part=statistics&id=" + youtubeChannel + "&key=" + apiKey;
+
+            console.log(url)
+            fetch(url)
+                .then(response => response.json())
+                .then(responseJSON => {
+                    const subscriberCount = responseJSON.items[0].statistics.subscriberCount;
+                    this.SetTitle(context, subscriberCount);
+                })
+                .catch(error => {
+                    console.error(error);
+                    this.SetTitle(context, "Ошибка");
+                });
+        }
+    };
 
     function connectElgatoStreamDeckSocket(inPort, inPluginUUID, inRegisterEvent, inInfo) {
         pluginUUID = inPluginUUID
@@ -142,6 +218,11 @@
                     "keyDown": () => likesAction.onKeyDown(context, settings, coordinates, userDesiredState),
                     "keyUp": () => likesAction.onKeyUp(context, settings, coordinates, userDesiredState),
                     "willAppear": () => likesAction.onWillAppear(context, settings, coordinates)
+                },
+                "com.nefrit.youtube.subscribers": {
+                    "keyDown": () => subscribersAction.onKeyDown(context, settings, coordinates, userDesiredState),
+                    "keyUp": () => subscribersAction.onKeyUp(context, settings, coordinates, userDesiredState),
+                    "willAppear": () => subscribersAction.onWillAppear(context, settings, coordinates)
                 }
             };
 
@@ -154,6 +235,7 @@
         websocket.onclose = function () {
         };
     }
+
 </script>
 
 </body>
