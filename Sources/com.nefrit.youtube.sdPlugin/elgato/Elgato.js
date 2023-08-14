@@ -1,9 +1,9 @@
 class Elgato {
 
     constructor(url, port, pluginUUID, inRegisterEvent) {
-        this.viewsAction = new ViewsAction(apiKey)
-        this.likesAction = new LikesAction(apiKey)
-        this.subsAction = new SubsAction(apiKey)
+        this.viewsAction = new ViewsAction(apiKey, this)
+        this.likesAction = new LikesAction(apiKey, this)
+        this.subsAction = new SubsAction(apiKey, this)
         this.websocket = new WebSocket(url + port);
         this.destination = Object.freeze({"HARDWARE_AND_SOFTWARE": 0, "HARDWARE_ONLY": 1, "SOFTWARE_ONLY": 2})
 

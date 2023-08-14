@@ -2,8 +2,9 @@ class LikesAction {
 
     static ACTION_UUID = "com.nefrit.youtube.likes"
 
-    constructor(apiKey) {
+    constructor(apiKey, elgato) {
         self.apiKey = apiKey
+        self.elgato = elgato
     }
 
     onKeyDown(context, settings, coordinates, userDesiredState) {
@@ -18,7 +19,7 @@ class LikesAction {
     }
 
     updateViews(context, settings) {
-        clearTimeout(timer);
+        console.log("update likes")
 
         var youtubeVideoId = ""
         if (settings != null && settings.hasOwnProperty('youtubeVideoId')) {
@@ -32,17 +33,10 @@ class LikesAction {
             .then(response => response.json())
             .then(responseJSON => {
                 const viewCount = responseJSON.items[0].statistics.likeCount;
-                elgato.updateTitle(context, viewCount)
+                self.elgato.updateTitle(context, viewCount)
             })
             .catch(error => {
-                elgato.updateTitle(context, "Ошибка")
+                self.elgato.updateTitle(context, "Ошибка")
             });
-
-        const timerFunc = () => {
-            timer = setTimeout(() => {
-                this.updateViews(context, settings);
-            }, 60000);
-        };
-        timerFunc();
     }
 }

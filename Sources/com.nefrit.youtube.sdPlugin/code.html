@@ -10,87 +10,8 @@
 <script>
     const apiKey = "AIzaSyB08u73xxNw0Vaire72STS28m4CZ8iD5y0";
 
-    let elgato = null
-
-    var timer;
-
-    const likesAction = {
-        type: "com.nefrit.youtube.likes",
-
-        onKeyDown: function (context, settings, coordinates, userDesiredState) {
-        },
-
-        onKeyUp: function (context, settings, coordinates, userDesiredState) {
-            var youtubeVideoId = ""
-            if (settings != null && settings.hasOwnProperty('youtubeVideoId')) {
-                youtubeVideoId = settings['youtubeVideoId'];
-            }
-
-            this.UpdateLikes(context, youtubeVideoId)
-        },
-
-        onWillAppear: function (context, settings, coordinates) {
-            var youtubeVideoId = ""
-            if (settings != null && settings.hasOwnProperty('youtubeVideoId')) {
-                youtubeVideoId = settings["youtubeVideoId"];
-            }
-            this.UpdateLikes(context, youtubeVideoId)
-        },
-
-        UpdateLikes: function (context, youtubeVideoId) {
-            const url = "https://www.googleapis.com/youtube/v3/videos?part=statistics&id=" + youtubeVideoId + "&key=" + apiKey;
-
-            fetch(url)
-                .then(response => response.json())
-                .then(responseJSON => {
-                    const viewCount = responseJSON.items[0].statistics.likeCount;
-                    elgato.updateTitle(context, viewCount)
-                })
-                .catch(error => {
-                    elgato.updateTitle(context, "Ошибка")
-                });
-        }
-    }
-
-    const subscribersAction = {
-        type: "com.nefrit.youtube.subscribers",
-
-        onKeyDown: function (context, settings, coordinates, userDesiredState) {
-        },
-
-        onKeyUp: function (context, settings, coordinates, userDesiredState) {
-            var youtubeChannel = ""
-            if (settings != null && settings.hasOwnProperty('youtubeChannel')) {
-                youtubeChannel = settings["youtubeChannel"];
-            }
-            this.UpdateSubscribers(context, youtubeChannel)
-        },
-
-        onWillAppear: function (context, settings, coordinates) {
-            var youtubeChannel = ""
-            if (settings != null && settings.hasOwnProperty('youtubeChannel')) {
-                youtubeChannel = settings["youtubeChannel"];
-            }
-            this.UpdateSubscribers(context, youtubeChannel)
-        },
-
-        UpdateSubscribers: function (context, youtubeChannel) {
-            const url = "https://www.googleapis.com/youtube/v3/channels?part=statistics&id=" + youtubeChannel + "&key=" + apiKey;
-
-            fetch(url)
-                .then(response => response.json())
-                .then(responseJSON => {
-                    const subscriberCount = responseJSON.items[0].statistics.subscriberCount;
-                    elgato.updateTitle(context, subscriberCount)
-                })
-                .catch(error => {
-                    elgato.updateTitle(context, "Ошибка")
-                });
-        }
-    };
-
     function connectElgatoStreamDeckSocket(inPort, inPluginUUID, inRegisterEvent, inInfo) {
-        elgato = new Elgato("ws://127.0.0.1:", inPort, inPluginUUID, inRegisterEvent)
+        new Elgato("ws://127.0.0.1:", inPort, inPluginUUID, inRegisterEvent)
     }
 
 </script>

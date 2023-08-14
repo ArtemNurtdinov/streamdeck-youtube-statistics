@@ -2,8 +2,9 @@ class SubsAction {
 
     static ACTION_UUID = "com.nefrit.youtube.subscribers"
 
-    constructor(apiKey) {
+    constructor(apiKey, elgato) {
         self.apiKey = apiKey
+        self.elgato = elgato
     }
 
     onKeyDown(context, settings, coordinates, userDesiredState) {
@@ -18,12 +19,13 @@ class SubsAction {
     }
 
     updateViews(context, settings) {
-        clearTimeout(timer);
+        console.log("update subs")
 
         var youtubeChannel = ""
         if (settings != null && settings.hasOwnProperty('youtubeChannel')) {
             youtubeChannel = settings["youtubeChannel"];
         }
+        if (!youtubeChannel) return
 
         const url = "https://www.googleapis.com/youtube/v3/channels?part=statistics&id=" + youtubeChannel + "&key=" + apiKey;
 
@@ -31,17 +33,10 @@ class SubsAction {
             .then(response => response.json())
             .then(responseJSON => {
                 const subscriberCount = responseJSON.items[0].statistics.subscriberCount;
-                elgato.updateTitle(context, subscriberCount)
+                self.elgato.updateTitle(context, subscriberCount)
             })
             .catch(error => {
-                elgato.updateTitle(context, "Ошибка")
+                self.elgato.updateTitle(context, "Ошибка")
             });
-
-        const timerFunc = () => {
-            timer = setTimeout(() => {
-                this.updateViews(context, settings);
-            }, 60000);
-        };
-        timerFunc();
     }
 }

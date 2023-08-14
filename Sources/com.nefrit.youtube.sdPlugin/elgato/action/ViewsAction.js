@@ -2,8 +2,9 @@ class ViewsAction {
 
     static ACTION_UUID = "com.nefrit.youtube.views"
 
-    constructor(apiKey) {
+    constructor(apiKey, elgato) {
         self.apiKey = apiKey
+        self.elgato = elgato
     }
 
     onKeyDown(context, settings, coordinates, userDesiredState) {
@@ -18,7 +19,7 @@ class ViewsAction {
     }
 
     updateViews(context, settings) {
-        clearTimeout(timer);
+        console.log("update views")
 
         var youtubeVideoId = ""
         if (settings != null && settings.hasOwnProperty('youtubeVideoId')) {
@@ -27,21 +28,15 @@ class ViewsAction {
         if (!youtubeVideoId) return
 
         const url = "https://www.googleapis.com/youtube/v3/videos?part=statistics&id=" + youtubeVideoId + "&key=" + self.apiKey;
+
         fetch(url)
             .then(response => response.json())
             .then(responseJSON => {
                 const viewCount = responseJSON.items[0].statistics.viewCount;
-                elgato.updateTitle(context, viewCount)
+                self.elgato.updateTitle(context, viewCount)
             })
             .catch(error => {
-                elgato.updateTitle(context, "Ошибка")
+                self.elgato.updateTitle(context, "Ошибка")
             });
-
-        const timerFunc = () => {
-            timer = setTimeout(() => {
-                this.updateViews(context, settings);
-            }, 60000);
-        };
-        timerFunc();
     }
 }
