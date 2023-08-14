@@ -9,27 +9,29 @@
 <body>
 <script>
 
-    var videoId = "Yr_7sd3x-cQ";
-    var apiKey = "";
+    const videoId = "Yr_7sd3x-cQ";
+    const apiKey = "";
 
-    var websocket = null;
-    var pluginUUID = null;
+    let websocket = null;
+    let pluginUUID = null;
 
-    var DestinationEnum = Object.freeze({"HARDWARE_AND_SOFTWARE": 0, "HARDWARE_ONLY": 1, "SOFTWARE_ONLY": 2})
+    const DestinationEnum = Object.freeze({"HARDWARE_AND_SOFTWARE": 0, "HARDWARE_ONLY": 1, "SOFTWARE_ONLY": 2})
 
-    var timer;
+    let timer;
 
-    var viewsAction = {
-
+    const viewsAction = {
         type: "com.nefrit.youtube.views",
 
         onKeyDown: function (context, settings, coordinates, userDesiredState) {
+            timer = setTimeout(function () {
+                viewsAction.SetTitle(context, 0);
+            }, 1500);
         },
 
-        onKeyUp: function (context, settings, coordinates, userDesiredState) {
+        onKeyUp: function (context, settings, coordinates, userDesiredState, videoId) {
             clearTimeout(timer);
 
-            var url = "https://www.googleapis.com/youtube/v3/videos?part=statistics&id=" + videoId + "&key=" + apiKey;
+            const url = "https://www.googleapis.com/youtube/v3/videos?part=statistics&id=" + videoId + "&key=" + apiKey;
 
             fetch(url)
                 .then(response => response.json())
@@ -46,12 +48,12 @@
         onWillAppear: function (context, settings, coordinates) {
         },
 
-        SetTitle: function (context, keyPressCounter) {
-            var json = {
+        SetTitle: function (context, title) {
+            const json = {
                 "event": "setTitle",
                 "context": context,
                 "payload": {
-                    "title": "" + keyPressCounter,
+                    "title": "" + title,
                     "target": DestinationEnum.HARDWARE_AND_SOFTWARE
                 }
             };
@@ -65,20 +67,19 @@
 
         onKeyDown: function (context, settings, coordinates, userDesiredState) {
             timer = setTimeout(function () {
-                counterAction.SetTitle(context, 0);
+                likesAction.SetTitle(context, 0);
             }, 1500);
         },
 
         onKeyUp: function (context, settings, coordinates, userDesiredState) {
             clearTimeout(timer);
 
-            var url = "https://www.googleapis.com/youtube/v3/videos?part=statistics&id=" + videoId + "&key=" + apiKey;
+            const url = "https://www.googleapis.com/youtube/v3/videos?part=statistics&id=" + videoId + "&key=" + apiKey;
 
             fetch(url)
                 .then(response => response.json())
                 .then(responseJSON => {
-                    var likesCount = responseJSON.items[0].statistics.likeCount
-
+                    const likesCount = responseJSON.items[0].statistics.likeCount;
                     this.SetTitle(context, likesCount);
                 })
                 .catch(error => {
@@ -87,12 +88,12 @@
                 });
         },
 
-        SetTitle: function (context, keyPressCounter) {
-            var json = {
+        SetTitle: function (context, title) {
+            const json = {
                 "event": "setTitle",
                 "context": context,
                 "payload": {
-                    "title": "" + keyPressCounter,
+                    "title": "" + title,
                     "target": DestinationEnum.HARDWARE_AND_SOFTWARE
                 }
             };
@@ -107,56 +108,52 @@
         websocket = new WebSocket("ws://127.0.0.1:" + inPort);
 
         function registerPlugin(inPluginUUID) {
-            var json = {
+            const json = {
                 "event": inRegisterEvent,
                 "uuid": inPluginUUID
             };
 
             websocket.send(JSON.stringify(json));
-        };
+        }
 
         websocket.onopen = function () {
             registerPlugin(pluginUUID);
         };
 
         websocket.onmessage = function (evt) {
-            var jsonObj = JSON.parse(evt.data);
-            var event = jsonObj['event'];
-            var action = jsonObj['action'];
-            var context = jsonObj['context'];
+            const jsonObj = JSON.parse(evt.data);
+            const event = jsonObj['event'];
+            const action = jsonObj['action'];
+            const context = jsonObj['context'];
 
-            var jsonPayload = jsonObj['payload'];
-            var settings = jsonPayload['settings'];
-            var coordinates = jsonPayload['coordinates'];
-            var userDesiredState = jsonPayload['userDesiredState'];
+            const jsonPayload = jsonObj['payload'];
+            const settings = jsonPayload['settings'];
+            const coordinates = jsonPayload['coordinates'];
+            const userDesiredState = jsonPayload['userDesiredState'];
 
-            if (event == "keyDown") {
-                if (action == "com.nefrit.youtube.views") {
-                    viewsAction.onKeyDown(context, settings, coordinates, userDesiredState);
+
+            const actions = {
+                "com.nefrit.youtube.views": {
+                    "keyDown": () => viewsAction.onKeyDown(context, settings, coordinates, userDesiredState),
+                    "keyUp": () => viewsAction.onKeyUp(context, settings, coordinates, userDesiredState),
+                    "willAppear": () => viewsAction.onWillAppear(context, settings, coordinates)
+                },
+                "com.nefrit.youtube.likes": {
+                    "keyDown": () => likesAction.onKeyDown(context, settings, coordinates, userDesiredState),
+                    "keyUp": () => likesAction.onKeyUp(context, settings, coordinates, userDesiredState),
+                    "willAppear": () => likesAction.onWillAppear(context, settings, coordinates)
                 }
-                if (action == "com.nefrit.youtube.likes") {
-                    likesAction.onKeyDown(context, settings, coordinates, userDesiredState);
-                }
-            } else if (event == "keyUp") {
-                if (action == "com.nefrit.youtube.views") {
-                    viewsAction.onKeyUp(context, settings, coordinates, userDesiredState);
-                }
-                if (action == "com.nefrit.youtube.likes") {
-                    likesAction.onKeyUp(context, settings, coordinates, userDesiredState);
-                }
-            } else if (event == "willAppear") {
-                if (action == "com.nefrit.youtube.views") {
-                    viewsAction.onWillAppear(context, settings, coordinates);
-                }
-                if (action == "com.nefrit.youtube.likes") {
-                    likesAction.onWillAppear(context, settings, coordinates);
-                }
+            };
+
+            const actionToExecute = actions[action]?.[event];
+            if (actionToExecute) {
+                actionToExecute();
             }
         };
 
         websocket.onclose = function () {
         };
-    };
+    }
 </script>
 
 </body>

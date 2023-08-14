@@ -5,19 +5,21 @@
 </head>
 <body>
 
-<input type="text" id="youtubeVideoIdInput" placeholder="Enter YouTube Video ID"/>
+<div class="sdpi-item">
+    <span class="sdpi-item-value">
+        <input class="sdpi-item-value" id="youtubeVideoId" value="" placeholder="Enter youtube video id" required>
+    </span>
+</div>
 
-<button id="saveButton">Save</button>
-
-<p id="currentYoutubeVideoId">YouTube Video ID: <span id="currentYoutubeVideoIdValue">-</span></p>
+<div class="sdpi-item">
+    <button class="sdpi-item-value" id="saveButton">Save</button>
+</div>
 
 <script>
     const youtubeVideoIdInput = document.getElementById('youtubeVideoIdInput');
     const saveButton = document.getElementById('saveButton');
     saveButton.addEventListener('click', function () {
         const youtubeVideoId = youtubeVideoIdInput.value;
-        const currentYoutubeVideoId = document.getElementById('currentYoutubeVideoIdValue');
-        currentYoutubeVideoId.textContent = youtubeVideoId;
     });
 </script>
 </body>
