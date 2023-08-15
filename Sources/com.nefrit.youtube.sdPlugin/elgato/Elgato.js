@@ -36,41 +36,45 @@ class Elgato {
             switch (action) {
                 case ViewsAction.ACTION_UUID:
                     switch (event) {
-                        case Event.KEY_DOWN:
-                            self.viewsAction.onKeyDown(context, settings, coordinates, userDesiredState)
+                        case "keyDown":
+                            this.viewsAction.onKeyDown(context, settings, coordinates, userDesiredState);
                             break;
-                        case Event.KEY_UP:
-                            self.viewsAction.onKeyUp(context, settings, coordinates, userDesiredState)
+                        case "keyUp":
+                            this.viewsAction.onKeyUp(context, settings, coordinates, userDesiredState);
                             break;
-                        case Event.WILL_APPEAR:
-                            self.viewsAction.onWillAppear(context, settings, coordinates)
+                        case "willAppear":
+                            this.viewsAction.onWillAppear(context, settings, coordinates);
                             break;
                     }
                     break;
                 case LikesAction.ACTION_UUID:
-                    if (event == Event.KEY_DOWN) {
-                        this.likesAction.onKeyDown(context, settings, coordinates, userDesiredState)
-                    }
-                    if (event == Event.KEY_UP) {
-                        this.likesAction.onKeyUp(context, settings, coordinates, userDesiredState)
-                    }
-                    if (event == Event.WILL_APPEAR) {
-                        this.likesAction.onWillAppear(context, settings, coordinates)
+                    switch (event) {
+                        case "keyDown":
+                            this.likesAction.onKeyDown(context, settings, coordinates, userDesiredState);
+                            break;
+                        case "keyUp":
+                            this.likesAction.onKeyUp(context, settings, coordinates, userDesiredState);
+                            break;
+                        case "willAppear":
+                            this.likesAction.onWillAppear(context, settings, coordinates);
+                            break;
                     }
                     break;
                 case SubsAction.ACTION_UUID:
-                    if (event == Event.KEY_DOWN) {
-                        this.subsAction.onKeyDown(context, settings, coordinates, userDesiredState)
-                    }
-                    if (event == Event.KEY_UP) {
-                        this.subsAction.onKeyUp(context, settings, coordinates, userDesiredState)
-                    }
-                    if (event == Event.WILL_APPEAR) {
-                        this.subsAction.onWillAppear(context, settings, coordinates)
+                    switch (event) {
+                        case "keyDown":
+                            this.subsAction.onKeyDown(context, settings, coordinates, userDesiredState);
+                            break;
+                        case "keyUp":
+                            this.subsAction.onKeyUp(context, settings, coordinates, userDesiredState);
+                            break;
+                        case "willAppear":
+                            this.subsAction.onWillAppear(context, settings, coordinates);
+                            break;
                     }
                     break;
             }
-        };
+        }
     }
 
     registerPlugin(inPluginUUID, inRegisterEvent) {
