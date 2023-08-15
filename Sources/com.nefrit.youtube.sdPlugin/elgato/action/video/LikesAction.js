@@ -18,6 +18,9 @@ class LikesAction {
         await this.updateViews(context, settings)
     }
 
+    async onWillDisappear() {
+    }
+
     async updateViews(context, settings) {
         var youtubeVideoId = ""
         if (settings != null && settings.hasOwnProperty('youtubeVideoId')) {

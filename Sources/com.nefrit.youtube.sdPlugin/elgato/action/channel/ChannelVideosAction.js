@@ -5,6 +5,7 @@ class ChannelVideosAction {
     constructor(titleUpdater, youtube) {
         this.youtube = youtube
         this.titleUpdater = titleUpdater
+        this.interval = null;
     }
 
     async onKeyDown(context, settings, coordinates, userDesiredState) {
@@ -15,10 +16,18 @@ class ChannelVideosAction {
     }
 
     async onWillAppear(context, settings, coordinates) {
+        this.interval = setInterval(async () => {
+            await this.updateViews(context, settings);
+        }, 60000);
         await this.updateViews(context, settings)
     }
 
+    async onWillDisappear() {
+        clearInterval(this.interval)
+    }
+
     async updateViews(context, settings) {
+        console.log("ChannelVideosAction updateViews called")
         var youtubeChannel = ""
         if (settings != null && settings.hasOwnProperty('youtubeChannel')) {
             youtubeChannel = settings["youtubeChannel"];

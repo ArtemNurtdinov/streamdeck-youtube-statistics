@@ -18,6 +18,9 @@ class SubsAction {
         await this.updateViews(context, settings)
     }
 
+    async onWillDisappear() {
+    }
+
     async updateViews(context, settings) {
         var youtubeChannel = ""
         if (settings != null && settings.hasOwnProperty('youtubeChannel')) {

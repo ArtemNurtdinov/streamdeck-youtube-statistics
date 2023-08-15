@@ -52,6 +52,9 @@ class Elgato {
                         case "willAppear":
                             this.viewsAction.onWillAppear(context, settings, coordinates);
                             break;
+                        case "willDisappear":
+                            this.viewsAction.onWillDisappear(context, settings, coordinates);
+                            break;
                     }
                     break;
                 case LikesAction.ACTION_UUID:
@@ -64,6 +67,9 @@ class Elgato {
                             break;
                         case "willAppear":
                             this.likesAction.onWillAppear(context, settings, coordinates);
+                            break;
+                        case "willDisappear":
+                            this.likesAction.onWillDisappear(context, settings, coordinates);
                             break;
                     }
                     break;
@@ -78,6 +84,9 @@ class Elgato {
                         case "willAppear":
                             this.commentsAction.onWillAppear(context, settings, coordinates);
                             break;
+                        case "willDisappear":
+                            this.commentsAction.onWillDisappear(context, settings, coordinates);
+                            break;
                     }
                     break;
                 case SubsAction.ACTION_UUID:
@@ -90,6 +99,9 @@ class Elgato {
                             break;
                         case "willAppear":
                             this.subsAction.onWillAppear(context, settings, coordinates);
+                            break;
+                        case "willDisappear":
+                            this.subsAction.onWillDisappear(context, settings, coordinates);
                             break;
                     }
                     break;
@@ -104,6 +116,9 @@ class Elgato {
                         case "willAppear":
                             this.channelViewsAction.onWillAppear(context, settings, coordinates);
                             break;
+                        case "willDisappear":
+                            this.channelViewsAction.onWillDisappear(context, settings, coordinates);
+                            break;
                     }
                     break;
                 case ChannelVideosAction.ACTION_UUID:
@@ -116,6 +131,9 @@ class Elgato {
                             break;
                         case "willAppear":
                             this.channedVideosAction.onWillAppear(context, settings, coordinates);
+                            break;
+                        case "willDisappear":
+                            this.channedVideosAction.onWillDisappear(context, settings, coordinates);
                             break;
                     }
                     break;
