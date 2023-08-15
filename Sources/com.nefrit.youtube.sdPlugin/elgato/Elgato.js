@@ -38,8 +38,6 @@ class Elgato {
             const coordinates = jsonPayload && jsonPayload['coordinates'];
             const userDesiredState = jsonPayload && jsonPayload['userDesiredState'];
 
-            console.log('new event', event, 'action', action)
-
             switch (action) {
                 case ViewsAction.ACTION_UUID:
                     switch (event) {

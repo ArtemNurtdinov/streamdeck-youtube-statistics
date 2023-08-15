@@ -1,9 +1,3 @@
-/// <reference path="../libs/js/property-inspector.js" />
-/// <reference path="../libs/js/action.js" />
-/// <reference path="../libs/js/utils.js" />
-
-console.log('Property Inspector loaded', $PI);
-
 $PI.onConnected(jsn => {
     console.log('Property Inspector connected', jsn);
     initPropertyInspector();
@@ -18,20 +12,14 @@ $PI.onConnected(jsn => {
 });
 
 function saveYoutubeVideoIdClicked() {
-    const youtubeVideoId = document.getElementById('youtubeVideoIdInput').value;
+    const youtubeVideoId = document.getElementById('youtubeVideoId').value;
     $PI.setSettings({'youtubeVideoId': youtubeVideoId});
 }
 
 function saveYoutubeChannelIdClicked() {
-    const youtubeChannel = document.getElementById('youtubeChannelInput').value;
+    const youtubeChannel = document.getElementById('youtubeChannel').value;
     $PI.setSettings({'youtubeChannel': youtubeChannel});
 }
-
-function adjustTabPadding(paddingInPixels = '12px') {
-    document.body.style.setProperty('--sdpi-tab-padding-horizontal', paddingInPixels);
-}
-
-adjustTabPadding('8px');
 
 function initPropertyInspector() {
     let actionUUID = $PI.actionInfo.action;
