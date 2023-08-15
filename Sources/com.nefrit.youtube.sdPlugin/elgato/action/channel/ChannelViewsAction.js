@@ -25,7 +25,6 @@ class ChannelViewsAction {
     }
 
     async updateViews(context, settings) {
-        console.log("ChannelViewsAction updateViews called")
         var youtubeChannel = "";
         if (settings != null && settings.hasOwnProperty("youtubeChannel")) {
             youtubeChannel = settings["youtubeChannel"];

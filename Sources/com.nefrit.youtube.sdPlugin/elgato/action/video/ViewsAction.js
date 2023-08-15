@@ -5,6 +5,7 @@ class ViewsAction {
     constructor(titleUpdater, youtube) {
         this.titleUpdater = titleUpdater
         this.youtube = youtube
+        this.interval = null
     }
 
     async onKeyDown(context, settings, coordinates, userDesiredState) {
@@ -15,10 +16,14 @@ class ViewsAction {
     }
 
     async onWillAppear(context, settings, coordinates) {
+        this.interval = setInterval(async () => {
+            await this.updateViews(context, settings);
+        }, 60000);
         await this.updateViews(context, settings)
     }
 
     async onWillDisappear() {
+        clearInterval(this.interval)
     }
 
     async updateViews(context, settings) {
