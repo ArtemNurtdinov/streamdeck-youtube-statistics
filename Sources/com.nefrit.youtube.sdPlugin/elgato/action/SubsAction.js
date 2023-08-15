@@ -2,10 +2,10 @@ class SubsAction {
 
     static ACTION_UUID = "com.nefrit.youtube.subscribers"
 
-    constructor(apiKey, elgato) {
+    constructor(apiKey, titleUpdater, youtube) {
         self.apiKey = apiKey
-        self.elgato = elgato
-        self.channelStatLoader = new ChannelStatLoader(apiKey)
+        self.titleUpdater = titleUpdater
+        self.youtube = youtube
     }
 
     async onKeyDown(context, settings, coordinates, userDesiredState) {
@@ -26,7 +26,7 @@ class SubsAction {
         }
         if (!youtubeChannel) return
 
-        const channelStat = await self.channelStatLoader.loadChannelStat(youtubeChannel)
-        self.elgato.updateTitle(context, channelStat.subscribersCount())
+        const channelStat = await self.youtube.loadChannelStat(youtubeChannel)
+        self.titleUpdater.updateTitle(context, channelStat.subscribersCount())
     }
 }

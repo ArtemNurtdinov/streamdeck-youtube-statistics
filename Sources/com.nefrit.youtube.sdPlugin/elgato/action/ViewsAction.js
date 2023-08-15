@@ -2,10 +2,10 @@ class ViewsAction {
 
     static ACTION_UUID = "com.nefrit.youtube.views"
 
-    constructor(apiKey, elgato) {
+    constructor(apiKey, titleUpdater, youtube) {
         self.apiKey = apiKey
-        self.elgato = elgato
-        self.videoStatLoader = new VideoStatLoader(apiKey)
+        self.titleUpdater = titleUpdater
+        self.youtube = youtube
     }
 
     async onKeyDown(context, settings, coordinates, userDesiredState) {
@@ -26,7 +26,7 @@ class ViewsAction {
         }
         if (!youtubeVideoId) return
 
-        const videoStat = await self.videoStatLoader.loadVideoStat(youtubeVideoId)
-        self.elgato.updateTitle(context, videoStat.viewCount())
+        const videoStat = await self.youtube.loadVideoStatistic(youtubeVideoId)
+        self.titleUpdater.updateTitle(context, videoStat.viewCount())
     }
 }

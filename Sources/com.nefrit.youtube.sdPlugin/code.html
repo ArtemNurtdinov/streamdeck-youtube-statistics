@@ -8,12 +8,9 @@
 
 <body>
 <script>
-    const apiKey = "AIzaSyB08u73xxNw0Vaire72STS28m4CZ8iD5y0";
-
     function connectElgatoStreamDeckSocket(inPort, inPluginUUID, inRegisterEvent, inInfo) {
         new Elgato("ws://127.0.0.1:", inPort, inPluginUUID, inRegisterEvent)
     }
-
 </script>
 
 <script src="elgato/Elgato.js"></script>
