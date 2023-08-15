@@ -3,6 +3,6 @@ class ViewsAction extends VideoAction {
 
 
     getVideoValue(videoStat) {
-        return videoStat.viewCount;
+        return videoStat.viewCount
     }
 }

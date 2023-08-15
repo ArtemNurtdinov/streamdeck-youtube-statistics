@@ -31,10 +31,24 @@ class ChannelAction {
         if (!youtubeChannel) return;
 
         const channelStat = await this.youtube.loadChannelStat(youtubeChannel);
-        this.titleUpdater.updateTitle(context, this.getChannelValue(channelStat));
+        this.titleUpdater.updateTitle(context, this.formatNumber(this.getChannelValue(channelStat)));
     }
 
     getChannelValue(channelStat) {
         return null;
+    }
+
+    formatNumber(numberString) {
+        let number = parseInt(numberString);
+
+        if (number >= 1000000) {
+            number = (number / 1000000).toFixed(2) + "M";
+        } else if (number >= 100000) {
+            number = (number / 1000).toFixed(1) + "K";
+        } else if (number >= 10000) {
+            number = (number / 1000).toFixed(2) + "K";
+        }
+
+        return number;
     }
 }
