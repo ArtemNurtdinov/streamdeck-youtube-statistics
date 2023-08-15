@@ -1,11 +1,10 @@
-class SubsAction {
+class ChannelViewsAction {
 
-    static ACTION_UUID = "com.nefrit.youtube.subscribers"
+    static ACTION_UUID = "com.nefrit.youtube.channel.views"
 
-    constructor(apiKey, titleUpdater, youtube) {
-        self.apiKey = apiKey
-        self.titleUpdater = titleUpdater
-        self.youtube = youtube
+    constructor(titleUpdater, youtube) {
+        this.youtube = youtube
+        this.titleUpdater = titleUpdater
     }
 
     async onKeyDown(context, settings, coordinates, userDesiredState) {
@@ -26,7 +25,7 @@ class SubsAction {
         }
         if (!youtubeChannel) return
 
-        const channelStat = await self.youtube.loadChannelStat(youtubeChannel)
-        self.titleUpdater.updateTitle(context, channelStat.subscribersCount())
+        const channelStat = await this.youtube.loadChannelStat(youtubeChannel)
+        this.titleUpdater.updateTitle(context, channelStat.viewCount)
     }
 }

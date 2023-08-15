@@ -35,7 +35,7 @@ adjustTabPadding('8px');
 
 function initPropertyInspector() {
     let actionUUID = $PI.actionInfo.action;
-    if (actionUUID == 'com.nefrit.youtube.views' || actionUUID == 'com.nefrit.youtube.likes') {
+    if (actionUUID == 'com.nefrit.youtube.views' || actionUUID == 'com.nefrit.youtube.likes' || actionUUID == 'com.nefrit.youtube.comments') {
         document.getElementById("youtubeVideoIdView").style.display = "block"
         document.getElementById("youtubeChannelView").style.display = "none"
     } else {

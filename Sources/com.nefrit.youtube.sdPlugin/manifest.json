@@ -2,7 +2,7 @@
   "Actions": [
     {
       "Icon": "youtube",
-      "Name": "Views",
+      "Name": "Video views count",
       "States": [
         {
           "Image": "youtube",
@@ -15,7 +15,7 @@
     },
     {
       "Icon": "youtube",
-      "Name": "Likes",
+      "Name": "Video likes count",
       "States": [
         {
           "Image": "youtube",
@@ -28,7 +28,20 @@
     },
     {
       "Icon": "youtube",
-      "Name": "Subscribers",
+      "Name": "Video comments count",
+      "States": [
+        {
+          "Image": "youtube",
+          "TitleAlignment": "middle",
+          "FontSize": "16"
+        }
+      ],
+      "SupportedInMultiActions": false,
+      "UUID": "com.nefrit.youtube.comments"
+    },
+    {
+      "Icon": "youtube",
+      "Name": "Channel subscribers count",
       "States": [
         {
           "Image": "youtube",
@@ -38,6 +51,32 @@
       ],
       "SupportedInMultiActions": false,
       "UUID": "com.nefrit.youtube.subscribers"
+    },
+    {
+      "Icon": "youtube",
+      "Name": "Channel views count",
+      "States": [
+        {
+          "Image": "youtube",
+          "TitleAlignment": "middle",
+          "FontSize": "16"
+        }
+      ],
+      "SupportedInMultiActions": false,
+      "UUID": "com.nefrit.youtube.channel.views"
+    },
+    {
+      "Icon": "youtube",
+      "Name": "Channel videos count",
+      "States": [
+        {
+          "Image": "youtube",
+          "TitleAlignment": "middle",
+          "FontSize": "16"
+        }
+      ],
+      "SupportedInMultiActions": false,
+      "UUID": "com.nefrit.youtube.channel.videos"
     }
   ], 
   "SDKVersion": 2,

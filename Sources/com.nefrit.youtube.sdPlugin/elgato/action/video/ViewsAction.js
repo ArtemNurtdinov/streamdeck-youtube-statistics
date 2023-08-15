@@ -1,11 +1,10 @@
-class LikesAction {
+class ViewsAction {
 
-    static ACTION_UUID = "com.nefrit.youtube.likes"
+    static ACTION_UUID = "com.nefrit.youtube.views"
 
-    constructor(apiKey, titleUpdater, youtube) {
-        self.apiKey = apiKey
-        self.titleUpdater = titleUpdater
-        self.youtube = youtube
+    constructor(titleUpdater, youtube) {
+        this.titleUpdater = titleUpdater
+        this.youtube = youtube
     }
 
     async onKeyDown(context, settings, coordinates, userDesiredState) {
@@ -26,7 +25,7 @@ class LikesAction {
         }
         if (!youtubeVideoId) return
 
-        const videoStat = await self.youtube.loadVideoStatistic(youtubeVideoId)
-        self.titleUpdater.updateTitle(context, videoStat.likeCount())
+        const videoStat = await this.youtube.loadVideoStatistic(youtubeVideoId)
+        this.titleUpdater.updateTitle(context, videoStat.viewCount)
     }
 }

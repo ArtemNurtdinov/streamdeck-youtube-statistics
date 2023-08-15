@@ -1,7 +1,7 @@
 class TitleUpdater {
 
     constructor(websocket) {
-        this.websocket = websocket
+        self.websocket = websocket
     }
 
     updateTitle(context, title) {
@@ -14,6 +14,6 @@ class TitleUpdater {
             }
         };
 
-        this.websocket.send(JSON.stringify(json));
+        self.websocket.send(JSON.stringify(json));
     }
 }

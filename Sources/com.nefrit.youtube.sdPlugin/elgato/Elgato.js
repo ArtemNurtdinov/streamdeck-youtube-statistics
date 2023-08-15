@@ -7,13 +7,18 @@ const Destination = {
 class Elgato {
 
     constructor(url, port, pluginUUID, inRegisterEvent) {
+        this.websocket = new WebSocket(url + port)
         const youtube = new Youtube()
-        this.websocket = new WebSocket(url + port);
-        this.titleUpdater = new TitleUpdater(this.websocket)
 
-        this.viewsAction = new ViewsAction(apiKey, this.titleUpdater, youtube)
-        this.likesAction = new LikesAction(apiKey, this.titleUpdater, youtube)
-        this.subsAction = new SubsAction(apiKey, this.titleUpdater, youtube)
+        const titleUpdater = new TitleUpdater(this.websocket)
+
+        this.viewsAction = new ViewsAction(titleUpdater, youtube)
+        this.likesAction = new LikesAction(titleUpdater, youtube)
+        this.commentsAction = new CommentsAction(titleUpdater, youtube)
+
+        this.subsAction = new SubsAction(titleUpdater, youtube)
+        this.channelViewsAction = new ChannelViewsAction(titleUpdater, youtube)
+        this.channedVideosAction = new ChannelVideosAction(titleUpdater, youtube)
 
         this.websocket.onopen = () => {
             this.registerPlugin(pluginUUID, inRegisterEvent);
@@ -32,6 +37,8 @@ class Elgato {
             const settings = jsonPayload && jsonPayload['settings'];
             const coordinates = jsonPayload && jsonPayload['coordinates'];
             const userDesiredState = jsonPayload && jsonPayload['userDesiredState'];
+
+            console.log('new event', event, 'action', action)
 
             switch (action) {
                 case ViewsAction.ACTION_UUID:
@@ -60,6 +67,19 @@ class Elgato {
                             break;
                     }
                     break;
+                case CommentsAction.ACTION_UUID:
+                    switch (event) {
+                        case "keyDown":
+                            this.commentsAction.onKeyDown(context, settings, coordinates, userDesiredState);
+                            break;
+                        case "keyUp":
+                            this.commentsAction.onKeyUp(context, settings, coordinates, userDesiredState);
+                            break;
+                        case "willAppear":
+                            this.commentsAction.onWillAppear(context, settings, coordinates);
+                            break;
+                    }
+                    break;
                 case SubsAction.ACTION_UUID:
                     switch (event) {
                         case "keyDown":
@@ -70,6 +90,32 @@ class Elgato {
                             break;
                         case "willAppear":
                             this.subsAction.onWillAppear(context, settings, coordinates);
+                            break;
+                    }
+                    break;
+                case ChannelViewsAction.ACTION_UUID:
+                    switch (event) {
+                        case "keyDown":
+                            this.channelViewsAction.onKeyDown(context, settings, coordinates, userDesiredState);
+                            break;
+                        case "keyUp":
+                            this.channelViewsAction.onKeyUp(context, settings, coordinates, userDesiredState);
+                            break;
+                        case "willAppear":
+                            this.channelViewsAction.onWillAppear(context, settings, coordinates);
+                            break;
+                    }
+                    break;
+                case ChannelVideosAction.ACTION_UUID:
+                    switch (event) {
+                        case "keyDown":
+                            this.channedVideosAction.onKeyDown(context, settings, coordinates, userDesiredState);
+                            break;
+                        case "keyUp":
+                            this.channedVideosAction.onKeyUp(context, settings, coordinates, userDesiredState);
+                            break;
+                        case "willAppear":
+                            this.channedVideosAction.onWillAppear(context, settings, coordinates);
                             break;
                     }
                     break;
