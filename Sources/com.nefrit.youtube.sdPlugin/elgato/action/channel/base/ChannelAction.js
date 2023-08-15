@@ -23,6 +23,10 @@ class ChannelAction {
         clearInterval(this.interval);
     }
 
+    async didReceiveSettings(context, settings) {
+        await this.updateViews(context, settings);
+    }
+
     async updateViews(context, settings) {
         var youtubeChannel = "";
         if (settings != null && settings.hasOwnProperty("youtubeChannel")) {

@@ -38,6 +38,8 @@ class Elgato {
             const coordinates = jsonPayload && jsonPayload['coordinates'];
             const userDesiredState = jsonPayload && jsonPayload['userDesiredState'];
 
+            console.log('new event', event, 'action', action)
+
             switch (action) {
                 case ViewsAction.ACTION_UUID:
                     switch (event) {
@@ -53,6 +55,9 @@ class Elgato {
                         case "willDisappear":
                             this.viewsAction.onWillDisappear(context, settings, coordinates);
                             break;
+                        case "didReceiveSettings":
+                            this.viewsAction.didReceiveSettings(context, settings, coordinates);
+                            break
                     }
                     break;
                 case LikesAction.ACTION_UUID:
@@ -69,6 +74,9 @@ class Elgato {
                         case "willDisappear":
                             this.likesAction.onWillDisappear(context, settings, coordinates);
                             break;
+                        case "didReceiveSettings":
+                            this.likesAction.didReceiveSettings(context, settings, coordinates);
+                            break
                     }
                     break;
                 case CommentsAction.ACTION_UUID:
@@ -85,6 +93,9 @@ class Elgato {
                         case "willDisappear":
                             this.commentsAction.onWillDisappear(context, settings, coordinates);
                             break;
+                        case "didReceiveSettings":
+                            this.commentsAction.didReceiveSettings(context, settings, coordinates);
+                            break
                     }
                     break;
                 case SubsAction.ACTION_UUID:
@@ -101,6 +112,9 @@ class Elgato {
                         case "willDisappear":
                             this.subsAction.onWillDisappear(context, settings, coordinates);
                             break;
+                        case "didReceiveSettings":
+                            this.subsAction.didReceiveSettings(context, settings, coordinates);
+                            break
                     }
                     break;
                 case ChannelViewsAction.ACTION_UUID:
@@ -117,6 +131,9 @@ class Elgato {
                         case "willDisappear":
                             this.channelViewsAction.onWillDisappear(context, settings, coordinates);
                             break;
+                        case "didReceiveSettings":
+                            this.channelViewsAction.didReceiveSettings(context, settings, coordinates);
+                            break
                     }
                     break;
                 case ChannelVideosAction.ACTION_UUID:
@@ -133,6 +150,9 @@ class Elgato {
                         case "willDisappear":
                             this.channedVideosAction.onWillDisappear(context, settings, coordinates);
                             break;
+                        case "didReceiveSettings":
+                            this.channedVideosAction.didReceiveSettings(context, settings, coordinates);
+                            break
                     }
                     break;
             }

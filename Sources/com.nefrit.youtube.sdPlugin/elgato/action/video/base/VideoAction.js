@@ -23,6 +23,10 @@ class VideoAction {
         clearInterval(this.interval);
     }
 
+    async didReceiveSettings(context, settings) {
+        await this.updateViews(context, settings);
+    }
+
     async updateViews(context, settings) {
         var youtubeVideoId = ""
         if (settings != null && settings.hasOwnProperty('youtubeVideoId')) {
