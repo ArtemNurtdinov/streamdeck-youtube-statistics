@@ -11,10 +11,11 @@ class Elgato {
         const youtube = new Youtube()
 
         const titleUpdater = new TitleUpdater(this.websocket)
+        const imageUpdater = new ImageUpdater(this.websocket)
 
-        this.viewsAction = new ViewsAction(titleUpdater, youtube)
-        this.likesAction = new LikesAction(titleUpdater, youtube)
-        this.commentsAction = new CommentsAction(titleUpdater, youtube)
+        this.viewsAction = new ViewsAction(titleUpdater, imageUpdater, youtube)
+        this.likesAction = new LikesAction(titleUpdater, imageUpdater, youtube)
+        this.commentsAction = new CommentsAction(titleUpdater, imageUpdater, youtube)
 
         this.subsAction = new SubsAction(titleUpdater, youtube)
         this.channelViewsAction = new ChannelViewsAction(titleUpdater, youtube)

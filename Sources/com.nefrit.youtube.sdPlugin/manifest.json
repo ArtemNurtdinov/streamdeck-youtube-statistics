@@ -1,78 +1,78 @@
 {
   "Actions": [
     {
-      "Icon": "youtube",
+      "Icon": "assets/youtube",
       "Name": "Video views count",
       "States": [
         {
-          "Image": "youtube",
-          "TitleAlignment": "middle", 
-          "FontSize": "16"
+          "Image": "assets/youtube",
+          "TitleAlignment": "bottom",
+          "FontSize": "14"
         }
       ], 
       "SupportedInMultiActions": false,
       "UUID": "com.nefrit.youtube.views"
     },
     {
-      "Icon": "youtube",
+      "Icon": "assets/youtube",
       "Name": "Video likes count",
       "States": [
         {
-          "Image": "youtube",
+          "Image": "assets/youtube",
           "TitleAlignment": "middle",
-          "FontSize": "16"
+          "FontSize": "14"
         }
       ],
       "SupportedInMultiActions": false,
       "UUID": "com.nefrit.youtube.likes"
     },
     {
-      "Icon": "youtube",
+      "Icon": "assets/youtube",
       "Name": "Video comments count",
       "States": [
         {
-          "Image": "youtube",
+          "Image": "assets/youtube",
           "TitleAlignment": "middle",
-          "FontSize": "16"
+          "FontSize": "14"
         }
       ],
       "SupportedInMultiActions": false,
       "UUID": "com.nefrit.youtube.comments"
     },
     {
-      "Icon": "youtube",
+      "Icon": "assets/youtube",
       "Name": "Channel subscribers count",
       "States": [
         {
-          "Image": "youtube",
+          "Image": "assets/youtube",
           "TitleAlignment": "middle",
-          "FontSize": "16"
+          "FontSize": "14"
         }
       ],
       "SupportedInMultiActions": false,
       "UUID": "com.nefrit.youtube.subscribers"
     },
     {
-      "Icon": "youtube",
+      "Icon": "assets/youtube",
       "Name": "Channel views count",
       "States": [
         {
-          "Image": "youtube",
+          "Image": "assets/youtube",
           "TitleAlignment": "middle",
-          "FontSize": "16"
+          "FontSize": "14"
         }
       ],
       "SupportedInMultiActions": false,
       "UUID": "com.nefrit.youtube.channel.views"
     },
     {
-      "Icon": "youtube",
+      "Icon": "assets/youtube",
       "Name": "Channel videos count",
       "States": [
         {
-          "Image": "youtube",
+          "Image": "assets/youtube",
           "TitleAlignment": "middle",
-          "FontSize": "16"
+          "FontSize": "14"
         }
       ],
       "SupportedInMultiActions": false,
@@ -82,11 +82,13 @@
   "SDKVersion": 2,
   "Author": "ArtemNeFRiT",
   "CodePath": "code.html", 
-  "Description": "Get youtube statistic for your videos.",
-  "Name": "ArtemNeFRiT",
-  "Icon": "youtube",
-  "Version": "1.4",
+  "Description": "Get YouTube statistics for videos and channels. The plugin can show you the number of video views, likes, and comments, as well as the number of channel views, videos, and subscribers.",
+  "Name": "Youtube Stats Tracker",
+  "Icon": "assets/youtube",
+  "Version": "1.0.0",
   "PropertyInspectorPath": "index_pi.html",
+  "Category": "Youtube Stats Tracker",
+  "CategoryIcon": "logo_124",
   "OS": [
     {
         "Platform": "mac", 

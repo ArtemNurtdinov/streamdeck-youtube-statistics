@@ -1,19 +1,18 @@
-class TitleUpdater {
+class ImageUpdater {
 
     constructor(websocket) {
         this.websocket = websocket
     }
 
-    updateTitle(context, title) {
+    updateImage(context, image, target = Destination.HARDWARE_AND_SOFTWARE) {
         const json = {
-            "event": "setTitle",
+            "event": "setImage",
             "context": context,
             "payload": {
-                "title": "" + title,
-                "target": Destination.HARDWARE_AND_SOFTWARE
+                image,
+                target,
             }
-        };
-
+        }
         this.websocket.send(JSON.stringify(json));
     }
 }

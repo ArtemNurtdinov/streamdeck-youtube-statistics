@@ -17,4 +17,20 @@ class VideoStatLoader {
 
         return new VideoStat(viewCount, likeCount, favoriteCount, commentCount)
     }
+
+    async loadVideoPreview(youtubeVideoId) {
+        const url = `https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${youtubeVideoId}&key=${this.apiKey}`;
+
+        const response = await fetch(url);
+        const responseJSON = await response.json();
+        const previewUrl = responseJSON.items[0].snippet.thumbnails.high.url;
+
+        return new VideoPreview(previewUrl);
+    }
+}
+
+class VideoPreview {
+    constructor(previewUrl) {
+        this.previewUrl = previewUrl;
+    }
 }

@@ -1,8 +1,9 @@
 class VideoAction {
 
-    constructor(titleUpdater, youtube) {
+    constructor(titleUpdater, imageUpdater, youtube) {
         this.youtube = youtube;
         this.titleUpdater = titleUpdater;
+        this.imageUpdater = imageUpdater;
         this.interval = null;
     }
 
