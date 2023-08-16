@@ -11,16 +11,16 @@ $PI.onConnected(jsn => {
     });
 });
 
-function saveYoutubeVideoIdClicked() {
+function saveYoutubeVideoClicked() {
     const apiKey = document.getElementById('apiKey').value;
-    const youtubeVideoId = document.getElementById('youtubeVideoId').value;
-    $PI.setSettings({'apiKey': apiKey, 'youtubeVideoId': youtubeVideoId});
+    const youtubeVideo = document.getElementById('youtubeVideo').value;
+    $PI.setSettings({'apiKey': apiKey, 'youtubeVideo': youtubeVideo});
 }
 
 function saveYoutubeChannelIdClicked() {
     const apiKey = document.getElementById('apiKey').value;
-    const youtubeChannel = document.getElementById('youtubeChannel').value;
-    $PI.setSettings({'apiKey': apiKey, 'youtubeChannel': youtubeChannel});
+    const youtubeChannel = document.getElementById('youtubeChannelId').value;
+    $PI.setSettings({'apiKey': apiKey, 'youtubeChannelId': youtubeChannel});
 }
 
 function initPropertyInspector() {

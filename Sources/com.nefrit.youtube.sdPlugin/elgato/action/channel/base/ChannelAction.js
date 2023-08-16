@@ -34,8 +34,8 @@ class ChannelAction {
             apiKey = settings["apiKey"];
         }
         var youtubeChannel = "";
-        if (settings.hasOwnProperty("youtubeChannel")) {
-            youtubeChannel = settings["youtubeChannel"];
+        if (settings.hasOwnProperty("youtubeChannelId")) {
+            youtubeChannel = settings["youtubeChannelId"];
         }
         if (!youtubeChannel || !apiKey) return;
 

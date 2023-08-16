@@ -33,15 +33,13 @@ class VideoAction {
         if (settings.hasOwnProperty('apiKey')) {
             apiKey = settings["apiKey"];
         }
-        var youtubeVideoId = ""
-        if (settings.hasOwnProperty('youtubeVideoId')) {
-            youtubeVideoId = settings["youtubeVideoId"];
+        var youtubeVideo = ""
+        if (settings.hasOwnProperty('youtubeVideo')) {
+            youtubeVideo = settings["youtubeVideo"];
         }
-        if (!youtubeVideoId || !apiKey) return
+        if (!youtubeVideo || !apiKey) return
 
-        console.log('load video stat', settings)
-
-        const videoStat = await this.youtube.loadVideoStatistic(apiKey, youtubeVideoId);
+        const videoStat = await this.youtube.loadVideoStatistic(apiKey, youtubeVideo);
         this.titleUpdater.updateTitle(context, this.formatNumber(this.getVideoValue(videoStat)));
     }
 

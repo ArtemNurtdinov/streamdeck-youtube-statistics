@@ -1,5 +1,3 @@
-const apiKey = "AIzaSyB08u73xxNw0Vaire72STS28m4CZ8iD5y0";
-
 class Youtube {
 
     constructor() {
@@ -7,8 +5,8 @@ class Youtube {
         this.channelStatLoader = new ChannelStatLoader()
     }
 
-    loadVideoStatistic(apiKey, videoId) {
-        return this.videoStatLoader.loadVideoStat(apiKey, videoId)
+    loadVideoStatistic(apiKey, video) {
+        return this.videoStatLoader.loadVideoStat(apiKey, video)
     }
 
     loadChannelStat(apiKey, channelId) {
