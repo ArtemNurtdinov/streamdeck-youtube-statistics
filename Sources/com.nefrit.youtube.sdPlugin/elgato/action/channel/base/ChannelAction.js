@@ -15,7 +15,7 @@ class ChannelAction {
     async onWillAppear(context, settings, coordinates) {
         this.interval = setInterval(async () => {
             await this.updateViews(context, settings);
-        }, 60000);
+        }, 180000);
         await this.updateViews(context, settings);
     }
 
