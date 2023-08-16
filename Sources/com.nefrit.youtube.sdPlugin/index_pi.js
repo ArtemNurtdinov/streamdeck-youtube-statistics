@@ -12,23 +12,25 @@ $PI.onConnected(jsn => {
 });
 
 function saveYoutubeVideoIdClicked() {
+    const apiKey = document.getElementById('apiKey').value;
     const youtubeVideoId = document.getElementById('youtubeVideoId').value;
-    $PI.setSettings({'youtubeVideoId': youtubeVideoId});
+    $PI.setSettings({'apiKey': apiKey, 'youtubeVideoId': youtubeVideoId});
 }
 
 function saveYoutubeChannelIdClicked() {
+    const apiKey = document.getElementById('apiKey').value;
     const youtubeChannel = document.getElementById('youtubeChannel').value;
-    $PI.setSettings({'youtubeChannel': youtubeChannel});
+    $PI.setSettings({'apiKey': apiKey, 'youtubeChannel': youtubeChannel});
 }
 
 function initPropertyInspector() {
     let actionUUID = $PI.actionInfo.action;
     if (actionUUID == 'com.nefrit.youtube.views' || actionUUID == 'com.nefrit.youtube.likes' || actionUUID == 'com.nefrit.youtube.comments') {
-        document.getElementById("youtubeVideoIdView").style.display = "block"
-        document.getElementById("youtubeChannelView").style.display = "none"
+        document.getElementById("youtubeChannelInputView").style.display = "none"
+        document.getElementById("youtubeChannelButtonView").style.display = "none"
     } else {
-        document.getElementById("youtubeVideoIdView").style.display = "none"
-        document.getElementById("youtubeChannelView").style.display = "block"
+        document.getElementById("youtubeVideoInputView").style.display = "none"
+        document.getElementById("youtubeVideoButtonView").style.display = "none"
     }
 }
 

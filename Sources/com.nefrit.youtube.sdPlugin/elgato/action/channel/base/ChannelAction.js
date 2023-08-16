@@ -28,13 +28,18 @@ class ChannelAction {
     }
 
     async updateViews(context, settings) {
+        if (settings == null) return
+        var apiKey = ""
+        if (settings.hasOwnProperty('apiKey')) {
+            apiKey = settings["apiKey"];
+        }
         var youtubeChannel = "";
-        if (settings != null && settings.hasOwnProperty("youtubeChannel")) {
+        if (settings.hasOwnProperty("youtubeChannel")) {
             youtubeChannel = settings["youtubeChannel"];
         }
-        if (!youtubeChannel) return;
+        if (!youtubeChannel || !apiKey) return;
 
-        const channelStat = await this.youtube.loadChannelStat(youtubeChannel);
+        const channelStat = await this.youtube.loadChannelStat(apiKey, youtubeChannel);
         this.titleUpdater.updateTitle(context, this.formatNumber(this.getChannelValue(channelStat)));
     }
 

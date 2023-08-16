@@ -1,9 +1,8 @@
 class VideoAction {
 
-    constructor(titleUpdater, imageUpdater, youtube) {
+    constructor(titleUpdater, youtube) {
         this.youtube = youtube;
         this.titleUpdater = titleUpdater;
-        this.imageUpdater = imageUpdater;
         this.interval = null;
     }
 
@@ -29,14 +28,21 @@ class VideoAction {
     }
 
     async updateViews(context, settings) {
+        if (settings == null) return
+        var apiKey = ""
+        if (settings.hasOwnProperty('apiKey')) {
+            apiKey = settings["apiKey"];
+        }
         var youtubeVideoId = ""
-        if (settings != null && settings.hasOwnProperty('youtubeVideoId')) {
+        if (settings.hasOwnProperty('youtubeVideoId')) {
             youtubeVideoId = settings["youtubeVideoId"];
         }
-        if (!youtubeVideoId) return
+        if (!youtubeVideoId || !apiKey) return
 
-        const channelStat = await this.youtube.loadVideoStatistic(youtubeVideoId);
-        this.titleUpdater.updateTitle(context, this.formatNumber(this.getVideoValue(channelStat)));
+        console.log('load video stat', settings)
+
+        const videoStat = await this.youtube.loadVideoStatistic(apiKey, youtubeVideoId);
+        this.titleUpdater.updateTitle(context, this.formatNumber(this.getVideoValue(videoStat)));
     }
 
     getVideoValue(channelStat) {

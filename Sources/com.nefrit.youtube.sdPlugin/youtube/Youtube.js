@@ -3,15 +3,15 @@ const apiKey = "AIzaSyB08u73xxNw0Vaire72STS28m4CZ8iD5y0";
 class Youtube {
 
     constructor() {
-        this.videoStatLoader = new VideoStatLoader(apiKey)
-        this.channelStatLoader = new ChannelStatLoader(apiKey)
+        this.videoStatLoader = new VideoStatLoader()
+        this.channelStatLoader = new ChannelStatLoader()
     }
 
-    loadVideoStatistic(videoId) {
-        return this.videoStatLoader.loadVideoStat(videoId)
+    loadVideoStatistic(apiKey, videoId) {
+        return this.videoStatLoader.loadVideoStat(apiKey, videoId)
     }
 
-    loadChannelStat(channelId) {
-        return this.channelStatLoader.loadChannelStat(channelId)
+    loadChannelStat(apiKey, channelId) {
+        return this.channelStatLoader.loadChannelStat(apiKey, channelId)
     }
 }
