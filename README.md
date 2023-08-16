@@ -3,7 +3,7 @@
 
 # Description
 
-With this plugin you can easily track the statistic of your favorite channel or your new YouTube video. 
+With this plugin you can easily track the statistic of your favorite channel or your new YouTube video.
 
 The plugin can show you the number of video views, likes, and comments, as well as the number of channel views, videos, and subscribers.
 
@@ -11,18 +11,18 @@ The plugin can show you the number of video views, likes, and comments, as well 
 # Features
 
 - Track YouTube video statistics:
-    - Views count
-    - Likes count
-    - Comments count
+  - Views count
+  - Likes count
+  - Comments count
 - Track YouTube channel statistics:
-    - Subscribers count
-    - Views count
-    - Videos count
+  - Subscribers count
+  - Views count
+  - Videos count
 - Statistics refresh every 3 minutes
 - Pressing the button will open the corresponding video/channel
 - Cross-platform (macOS, Windows)
 
-![](screenshot.png)
+![](Sources/com.nefrit.youtube.sdPlugin/screenshot.png)
 
 # Changes
 ## 1.0.0
@@ -30,9 +30,9 @@ The plugin can show you the number of video views, likes, and comments, as well 
 
 # Configuration
 
-![](screenshot3.png)
+![](Sources/com.nefrit.youtube.sdPlugin/screenshot3.png)
 
-# API Key
+## API Key
 
 - Go to the Google Cloud Platform website (https://console.cloud.google.com/).
 
@@ -58,18 +58,18 @@ The plugin can show you the number of video views, likes, and comments, as well 
 That's it! You now have a Google API key that can be used with the `Youtube Stats Tracker` plugin.
 
 
-# Video ID
+## Video ID
 
 - You have two options
   - Link YouTube video (ex: `https://www.youtube.com/watch?v=Yr_7sd3x-cQ`)
   - Link YouTube video id: `v=Yr_7sd3x-cQ`
 
-# Channel ID
+## Channel ID
 
 - Open the YouTube channel and click on `About`.
 - Click on the `Share` button and then select `Copy channel ID`.
 
-![](screenshot2.png)
+![](Sources/com.nefrit.youtube.sdPlugin/screenshot2.png)
 
 
 # About author

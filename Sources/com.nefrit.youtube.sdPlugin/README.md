@@ -32,7 +32,7 @@ The plugin can show you the number of video views, likes, and comments, as well 
 
 ![](screenshot3.png)
 
-# API Key
+## API Key
 
 - Go to the Google Cloud Platform website (https://console.cloud.google.com/).
 
@@ -58,13 +58,13 @@ The plugin can show you the number of video views, likes, and comments, as well 
 That's it! You now have a Google API key that can be used with the `Youtube Stats Tracker` plugin.
 
 
-# Video ID
+## Video ID
 
 - You have two options
   - Link YouTube video (ex: `https://www.youtube.com/watch?v=Yr_7sd3x-cQ`)
   - Link YouTube video id: `v=Yr_7sd3x-cQ`
 
-# Channel ID
+## Channel ID
 
 - Open the YouTube channel and click on `About`.
 - Click on the `Share` button and then select `Copy channel ID`.
