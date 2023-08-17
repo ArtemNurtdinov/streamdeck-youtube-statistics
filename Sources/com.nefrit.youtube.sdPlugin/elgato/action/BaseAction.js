@@ -9,7 +9,6 @@ class BaseAction {
     }
 
     formatNumber(numberString) {
-        console.log(numberString)
         let number = parseInt(numberString);
 
         if (number >= 1000000) {
