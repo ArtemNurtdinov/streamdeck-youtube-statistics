@@ -11,14 +11,15 @@ class Elgato {
         const youtube = new Youtube()
 
         const titleUpdater = new TitleUpdater(this.websocket)
+        const urlOpener = new URLOpener(this.websocket)
 
-        this.viewsAction = new ViewsAction(titleUpdater, youtube)
-        this.likesAction = new LikesAction(titleUpdater, youtube)
-        this.commentsAction = new CommentsAction(titleUpdater, youtube)
+        this.viewsAction = new ViewsAction(titleUpdater, urlOpener, youtube)
+        this.likesAction = new LikesAction(titleUpdater, urlOpener, youtube)
+        this.commentsAction = new CommentsAction(titleUpdater, urlOpener, youtube)
 
-        this.subsAction = new SubsAction(titleUpdater, youtube)
-        this.channelViewsAction = new ChannelViewsAction(titleUpdater, youtube)
-        this.channedVideosAction = new ChannelVideosAction(titleUpdater, youtube)
+        this.subsAction = new SubsAction(titleUpdater, urlOpener, youtube)
+        this.channelViewsAction = new ChannelViewsAction(titleUpdater, urlOpener, youtube)
+        this.channedVideosAction = new ChannelVideosAction(titleUpdater, urlOpener, youtube)
 
         this.websocket.onopen = () => {
             this.registerPlugin(pluginUUID, inRegisterEvent);

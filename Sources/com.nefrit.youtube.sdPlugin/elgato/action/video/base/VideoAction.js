@@ -1,15 +1,20 @@
-class VideoAction {
+class VideoAction extends BaseAction {
 
-    constructor(titleUpdater, youtube) {
+    constructor(titleUpdater, urlOpener, youtube) {
+        super();
         this.youtube = youtube;
         this.titleUpdater = titleUpdater;
+        this.urlOpener = urlOpener
         this.interval = null;
     }
 
     async onKeyDown(context, settings, coordinates, userDesiredState) {}
 
     async onKeyUp(context, settings, coordinates, userDesiredState) {
-        await this.updateViews(context, settings);
+        let youtubeVideo = this.getYoutubeVideo(settings)
+        if (!youtubeVideo) return
+        const url = this.youtube.getYoutubeVideoURL(youtubeVideo)
+        this.urlOpener.open(url)
     }
 
     async onWillAppear(context, settings, coordinates) {
@@ -29,14 +34,8 @@ class VideoAction {
 
     async updateViews(context, settings) {
         if (settings == null) return
-        var apiKey = ""
-        if (settings.hasOwnProperty('apiKey')) {
-            apiKey = settings["apiKey"];
-        }
-        var youtubeVideo = ""
-        if (settings.hasOwnProperty('youtubeVideo')) {
-            youtubeVideo = settings["youtubeVideo"];
-        }
+        const apiKey = this.getYouTubeAPIKey(settings)
+        const youtubeVideo = this.getYoutubeVideo(settings)
         if (!youtubeVideo || !apiKey) return
 
         const videoStat = await this.youtube.loadVideoStatistic(apiKey, youtubeVideo);
@@ -47,17 +46,11 @@ class VideoAction {
         return null;
     }
 
-    formatNumber(numberString) {
-        let number = parseInt(numberString);
-
-        if (number >= 1000000) {
-            number = (number / 1000000).toFixed(2) + "M";
-        } else if (number >= 100000) {
-            number = (number / 1000).toFixed(1) + "K";
-        } else if (number >= 10000) {
-            number = (number / 1000).toFixed(2) + "K";
+    getYoutubeVideo(settings) {
+        let youtubeVideo = "";
+        if (settings.hasOwnProperty('youtubeVideo')) {
+            youtubeVideo = settings["youtubeVideo"];
         }
-
-        return number;
+        return youtubeVideo
     }
 }

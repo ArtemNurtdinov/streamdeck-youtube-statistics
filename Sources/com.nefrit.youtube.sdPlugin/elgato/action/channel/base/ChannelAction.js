@@ -1,15 +1,20 @@
-class ChannelAction {
+class ChannelAction extends BaseAction {
 
-    constructor(titleUpdater, youtube) {
+    constructor(titleUpdater, urlOpener, youtube) {
+        super();
         this.youtube = youtube;
         this.titleUpdater = titleUpdater;
+        this.urlOpener = urlOpener
         this.interval = null;
     }
 
     async onKeyDown(context, settings, coordinates, userDesiredState) {}
 
     async onKeyUp(context, settings, coordinates, userDesiredState) {
-        await this.updateViews(context, settings);
+        let youtubeChannel = this.getYoutubeChannel(settings)
+        if (!youtubeChannel) return;
+        const url = this.youtube.getYoutubeChannelURL(youtubeChannel)
+        this.urlOpener.open(url)
     }
 
     async onWillAppear(context, settings, coordinates) {
@@ -29,14 +34,8 @@ class ChannelAction {
 
     async updateViews(context, settings) {
         if (settings == null) return
-        var apiKey = ""
-        if (settings.hasOwnProperty('apiKey')) {
-            apiKey = settings["apiKey"];
-        }
-        var youtubeChannel = "";
-        if (settings.hasOwnProperty("youtubeChannelId")) {
-            youtubeChannel = settings["youtubeChannelId"];
-        }
+        const apiKey = this.getYouTubeAPIKey(settings)
+        const youtubeChannel = this.getYoutubeChannel(settings)
         if (!youtubeChannel || !apiKey) return;
 
         const channelStat = await this.youtube.loadChannelStat(apiKey, youtubeChannel);
@@ -47,17 +46,11 @@ class ChannelAction {
         return null;
     }
 
-    formatNumber(numberString) {
-        let number = parseInt(numberString);
-
-        if (number >= 1000000) {
-            number = (number / 1000000).toFixed(2) + "M";
-        } else if (number >= 100000) {
-            number = (number / 1000).toFixed(1) + "K";
-        } else if (number >= 10000) {
-            number = (number / 1000).toFixed(2) + "K";
+    getYoutubeChannel(settings) {
+        let youtubeChannel = "";
+        if (settings.hasOwnProperty("youtubeChannelId")) {
+            youtubeChannel = settings["youtubeChannelId"];
         }
-
-        return number;
+        return youtubeChannel
     }
 }
