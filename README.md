@@ -1,14 +1,11 @@
-`Youtube Stats Tracker` will help you track the statistics of a video/channel on YouTube.
+`Youtube Stats Tracker` will help you track the statistics of a video, channel or stream on YouTube.
 
 
 # Description
 
-With this plugin you can easily track the statistic of your favorite channel or your new YouTube video.
+With this plugin you can easily track the statistic of your favorite channel, YouTube video or stream.
 
-The plugin can show you the number of video views, likes, and comments, as well as the number of channel views, videos, and subscribers.
-
-
-# Features
+The plugin provides information on the number of video views, likes, and comments, as well as the number of channel views, videos, and subscribers. Furthermore, it can display the viewer count during the live stream.
 
 - Track YouTube video statistics:
   - Views count
@@ -18,11 +15,13 @@ The plugin can show you the number of video views, likes, and comments, as well 
   - Subscribers count
   - Views count
   - Videos count
+- Track YouTube stream statistics:
+  - Current online
 - Statistics refresh every 3 minutes
 - Pressing the button will open the corresponding video/channel
 - Cross-platform (macOS, Windows)
 
-![](Sources/com.nefrit.youtube.sdPlugin/screenshot.png)
+![](screenshot.png)
 
 # Changes
 ## 1.0.0
@@ -30,7 +29,7 @@ The plugin can show you the number of video views, likes, and comments, as well 
 
 # Configuration
 
-![](Sources/com.nefrit.youtube.sdPlugin/screenshot3.png)
+![](screenshot3.png)
 
 ## API Key
 
@@ -58,7 +57,7 @@ The plugin can show you the number of video views, likes, and comments, as well 
 That's it! You now have a Google API key that can be used with the `Youtube Stats Tracker` plugin.
 
 
-## Video ID
+## Video
 
 - You have two options
   - Link YouTube video (ex: `https://www.youtube.com/watch?v=Yr_7sd3x-cQ`)
@@ -69,7 +68,13 @@ That's it! You now have a Google API key that can be used with the `Youtube Stat
 - Open the YouTube channel and click on `About`.
 - Click on the `Share` button and then select `Copy channel ID`.
 
-![](Sources/com.nefrit.youtube.sdPlugin/screenshot2.png)
+## Stream
+
+- You have two options
+  - Link YouTube stream (ex: `https://www.youtube.com/watch?v=Yr_7sd3x-cQ`)
+  - Link YouTube stream id: `v=Yr_7sd3x-cQ`
+
+![](screenshot2.png)
 
 
 # About author
