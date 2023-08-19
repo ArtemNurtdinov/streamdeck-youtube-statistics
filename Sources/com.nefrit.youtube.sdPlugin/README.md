@@ -68,14 +68,13 @@ That's it! You now have a Google API key that can be used with the `Youtube Stat
 - Open the YouTube channel and click on `About`.
 - Click on the `Share` button and then select `Copy channel ID`.
 
+![](screenshot2.png)
+
 ## Stream
 
 - You have two options
   - Link YouTube stream (ex: `https://www.youtube.com/watch?v=Yr_7sd3x-cQ`)
   - Link YouTube stream id: `v=Yr_7sd3x-cQ`
-
-![](screenshot2.png)
-
 
 # About author
 
