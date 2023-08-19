@@ -21,7 +21,7 @@ The plugin provides information on the number of video views, likes, and comment
 - Pressing the button will open the corresponding video/channel
 - Cross-platform (macOS, Windows)
 
-![](screenshot.png)
+![](Sources/com.nefrit.youtube.sdPlugin/screenshot.png)
 
 # Changes
 ## 1.0.0
@@ -29,7 +29,7 @@ The plugin provides information on the number of video views, likes, and comment
 
 # Configuration
 
-![](screenshot3.png)
+![](Sources/com.nefrit.youtube.sdPlugin/screenshot3.png)
 
 ## API Key
 
@@ -68,7 +68,7 @@ That's it! You now have a Google API key that can be used with the `Youtube Stat
 - Open the YouTube channel and click on `About`.
 - Click on the `Share` button and then select `Copy channel ID`.
 
-![](screenshot2.png)
+![](Sources/com.nefrit.youtube.sdPlugin/screenshot2.png)
 
 ## Stream
 
