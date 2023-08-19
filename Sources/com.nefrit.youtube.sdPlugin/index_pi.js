@@ -23,14 +23,31 @@ function saveYoutubeChannelIdClicked() {
     $PI.setSettings({'apiKey': apiKey, 'youtubeChannelId': youtubeChannel});
 }
 
+function saveYoutubeStreamClicked() {
+    const apiKey = document.getElementById('apiKey').value;
+    const youtubeStream = document.getElementById('youtubeStream').value;
+    $PI.setSettings({'apiKey': apiKey, 'youtubeStream': youtubeStream});
+}
+
 function initPropertyInspector() {
     let actionUUID = $PI.actionInfo.action;
     if (actionUUID == 'com.nefrit.youtube.views' || actionUUID == 'com.nefrit.youtube.likes' || actionUUID == 'com.nefrit.youtube.comments') {
         document.getElementById("youtubeChannelInputView").style.display = "none"
         document.getElementById("youtubeChannelButtonView").style.display = "none"
-    } else {
+        document.getElementById("youtubeStreamInputView").style.display = "none"
+        document.getElementById("youtubeStreamButtonView").style.display = "none"
+    }
+    if (actionUUID == 'com.nefrit.youtube.subscribers' || actionUUID == 'com.nefrit.youtube.channel.views' || actionUUID == 'com.nefrit.youtube.channel.videos') {
         document.getElementById("youtubeVideoInputView").style.display = "none"
         document.getElementById("youtubeVideoButtonView").style.display = "none"
+        document.getElementById("youtubeStreamInputView").style.display = "none"
+        document.getElementById("youtubeStreamButtonView").style.display = "none"
+    }
+    if (actionUUID == 'com.nefrit.youtube.stream.online') {
+        document.getElementById("youtubeVideoInputView").style.display = "none"
+        document.getElementById("youtubeVideoButtonView").style.display = "none"
+        document.getElementById("youtubeChannelInputView").style.display = "none"
+        document.getElementById("youtubeChannelButtonView").style.display = "none"
     }
 }
 

@@ -27,11 +27,13 @@
 </head>
 <body>
 
-<div class="sdpi-wrapper" id="youtubeVideoView">
+<div class="sdpi-wrapper">
+
     <div class="sdpi-item">
         <div class="sdpi-item-label">API Key</div>
         <input class="sdpi-item-value" type="text" id="apiKey" value="" placeholder="Enter youtube API key">
     </div>
+
     <div class="sdpi-item" id="youtubeVideoInputView">
         <div class="sdpi-item-label">Video</div>
         <input class="sdpi-item-value" type="text" id="youtubeVideo" value="" placeholder="Enter youtube video (url or id)">
@@ -40,6 +42,7 @@
         <div class="sdpi-item-label empty"></div>
         <button onclick="saveYoutubeVideoClicked()" class="sdpi-item-value" id="saveVideoButton">Save</button>
     </div>
+
     <div class="sdpi-item" id="youtubeChannelInputView">
         <div class="sdpi-item-label">Channel ID</div>
         <input class="sdpi-item-value" type="text" id="youtubeChannelId" value="" placeholder="Enter youtube channel ID">
@@ -48,6 +51,16 @@
         <div class="sdpi-item-label empty"></div>
         <button onclick="saveYoutubeChannelIdClicked()" class="sdpi-item-value" id="saveChannelButton">Save</button>
     </div>
+
+    <div class="sdpi-item" id="youtubeStreamInputView">
+        <div class="sdpi-item-label">Stream</div>
+        <input class="sdpi-item-value" type="text" id="youtubeStream" value="" placeholder="Enter youtube stream (url or id)">
+    </div>
+    <div class="sdpi-item" id="youtubeStreamButtonView">
+        <div class="sdpi-item-label empty"></div>
+        <button onclick="saveYoutubeStreamClicked()" class="sdpi-item-value" id="saveStreamButton">Save</button>
+    </div>
+
 </div>
 
 

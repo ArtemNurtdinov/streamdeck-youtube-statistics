@@ -21,6 +21,8 @@ class Elgato {
         this.channelViewsAction = new ChannelViewsAction(titleUpdater, urlOpener, youtube)
         this.channedVideosAction = new ChannelVideosAction(titleUpdater, urlOpener, youtube)
 
+        this.streamOnlineAction = new StreamOnlineAction(titleUpdater, urlOpener, youtube)
+
         this.websocket.onopen = () => {
             this.registerPlugin(pluginUUID, inRegisterEvent);
         };
@@ -151,6 +153,25 @@ class Elgato {
                             break;
                         case "didReceiveSettings":
                             this.channedVideosAction.didReceiveSettings(context, settings, coordinates);
+                            break
+                    }
+                    break;
+                case StreamOnlineAction.ACTION_UUID:
+                    switch (event) {
+                        case "keyDown":
+                            this.streamOnlineAction.onKeyDown(context, settings, coordinates, userDesiredState);
+                            break;
+                        case "keyUp":
+                            this.streamOnlineAction.onKeyUp(context, settings, coordinates, userDesiredState);
+                            break;
+                        case "willAppear":
+                            this.streamOnlineAction.onWillAppear(context, settings, coordinates);
+                            break;
+                        case "willDisappear":
+                            this.streamOnlineAction.onWillDisappear(context, settings, coordinates);
+                            break;
+                        case "didReceiveSettings":
+                            this.streamOnlineAction.didReceiveSettings(context, settings, coordinates);
                             break
                     }
                     break;

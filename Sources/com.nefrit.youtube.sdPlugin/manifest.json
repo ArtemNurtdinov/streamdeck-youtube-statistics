@@ -77,6 +77,19 @@
       ],
       "SupportedInMultiActions": false,
       "UUID": "com.nefrit.youtube.channel.videos"
+    },
+    {
+      "Icon": "assets/youtube",
+      "Name": "Stream online count",
+      "States": [
+        {
+          "Image": "assets/youtube",
+          "TitleAlignment": "middle",
+          "FontSize": "14"
+        }
+      ],
+      "SupportedInMultiActions": false,
+      "UUID": "com.nefrit.youtube.stream.online"
     }
   ], 
   "SDKVersion": 2,

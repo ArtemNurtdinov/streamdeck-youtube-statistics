@@ -6,6 +6,7 @@ class Youtube {
     constructor() {
         this.videoStatLoader = new VideoStatLoader()
         this.channelStatLoader = new ChannelStatLoader()
+        this.streamStatLoader = new StreamStatLoader()
     }
 
     loadVideoStatistic(apiKey, video) {
@@ -14,6 +15,10 @@ class Youtube {
 
     loadChannelStat(apiKey, channelId) {
         return this.channelStatLoader.loadChannelStat(apiKey, channelId)
+    }
+
+    loadStreamStatistic(apiKey, streamId) {
+        return this.streamStatLoader.loadStreamStat(apiKey, streamId)
     }
 
     getYoutubeVideoURL(youtubeVideo) {
@@ -25,5 +30,12 @@ class Youtube {
 
     getYoutubeChannelURL(youtubeChannel) {
         return this.CHANNEL_URL_FORMAT + youtubeChannel
+    }
+
+    getYoutubeStreamURL(youtubeStream) {
+        if (youtubeStream.includes("youtube.com")) {
+            return youtubeStream
+        }
+        return this.VIDEO_URL_FORMAT + youtubeStream
     }
 }
