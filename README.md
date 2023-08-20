@@ -1,5 +1,6 @@
 `Youtube Stats Tracker` will help you track the statistics of a video, channel or stream on YouTube.
 
+![](preview/preview.png)
 
 # Description
 

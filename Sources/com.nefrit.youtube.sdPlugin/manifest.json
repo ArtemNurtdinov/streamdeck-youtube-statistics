@@ -100,6 +100,7 @@
   "Icon": "assets/youtube",
   "Version": "1.0.0",
   "PropertyInspectorPath": "index_pi.html",
+  "URL": "https://github.com/ArtemNeFRiT/elgato-youtube-statistics",
   "Category": "YouTube Stats Tracker",
   "CategoryIcon": "logo_124",
   "OS": [
