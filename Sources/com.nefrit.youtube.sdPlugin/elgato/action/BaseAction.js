@@ -1,5 +1,9 @@
 class BaseAction {
 
+    constructor() {
+        this.timers = new Map()
+    }
+
     getYouTubeAPIKey(settings) {
         let apiKey = "";
         if (settings.hasOwnProperty('apiKey')) {
@@ -20,5 +24,41 @@ class BaseAction {
         }
 
         return number;
+    }
+
+    async onWillAppear(context, settings, coordinates) {
+        await this.setTimer(context, settings)
+        await this.updateViews(context, settings);
+    }
+
+    async onWillDisappear(context, settings, coordinates) {
+        await this.clearTimer(context, settings)
+    }
+
+    async didReceiveSettings(context, settings) {
+        await this.updateViews(context, settings);
+    }
+
+    async updateViews(context, settings) {
+    }
+
+    async setTimer(context, settings) {
+        if (this.timers.has(context)) {
+            return
+        }
+        const interval = setInterval(async () => {
+            await this.updateViews(context, settings)
+        }, 20000)
+
+        this.timers.set(context, interval)
+    }
+
+    async clearTimer(context, settings) {
+        if (!this.timers.has(context)) {
+            return
+        }
+        const interval = this.timers.get(context)
+        clearInterval(interval)
+        this.timers.delete(context)
     }
 }

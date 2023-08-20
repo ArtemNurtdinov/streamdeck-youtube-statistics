@@ -3,7 +3,6 @@ class ChannelStatLoader {
     async loadChannelStat(apiKey, channelId) {
         const url = "https://www.googleapis.com/youtube/v3/channels?part=statistics&id=" + channelId + "&key=" + apiKey;
 
-        console.log(url)
         const response = await fetch(url);
         const responseJSON = await response.json();
         const result = responseJSON.items[0].statistics
