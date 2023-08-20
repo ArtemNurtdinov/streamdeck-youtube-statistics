@@ -13,20 +13,23 @@ $PI.onConnected(jsn => {
 
 function saveYoutubeVideoClicked() {
     const apiKey = document.getElementById('apiKey').value;
+    const period = document.getElementById('period').value;
     const youtubeVideo = document.getElementById('youtubeVideo').value;
-    $PI.setSettings({'apiKey': apiKey, 'youtubeVideo': youtubeVideo});
+    $PI.setSettings({'apiKey': apiKey, 'period': period, 'youtubeVideo': youtubeVideo});
 }
 
 function saveYoutubeChannelIdClicked() {
     const apiKey = document.getElementById('apiKey').value;
+    const period = document.getElementById('period').value;
     const youtubeChannel = document.getElementById('youtubeChannelId').value;
-    $PI.setSettings({'apiKey': apiKey, 'youtubeChannelId': youtubeChannel});
+    $PI.setSettings({'apiKey': apiKey, 'period': period, 'youtubeChannelId': youtubeChannel});
 }
 
 function saveYoutubeStreamClicked() {
     const apiKey = document.getElementById('apiKey').value;
+    const period = document.getElementById('period').value;
     const youtubeStream = document.getElementById('youtubeStream').value;
-    $PI.setSettings({'apiKey': apiKey, 'youtubeStream': youtubeStream});
+    $PI.setSettings({'apiKey': apiKey, 'period': period, 'youtubeStream': youtubeStream});
 }
 
 function initPropertyInspector() {

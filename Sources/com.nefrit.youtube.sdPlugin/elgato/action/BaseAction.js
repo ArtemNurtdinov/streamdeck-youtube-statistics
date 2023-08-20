@@ -27,7 +27,7 @@ class BaseAction {
     }
 
     async onWillAppear(context, settings, coordinates) {
-        await this.setTimer(context, settings)
+        await this.createTimer(context, settings)
         await this.updateViews(context, settings);
     }
 
@@ -36,19 +36,31 @@ class BaseAction {
     }
 
     async didReceiveSettings(context, settings) {
+        await this.updateTimer(context, settings);
         await this.updateViews(context, settings);
     }
 
     async updateViews(context, settings) {
+        console.log('updateViews', context)
     }
 
-    async setTimer(context, settings) {
+    async updateTimer(context, settings) {
+        await this.clearTimer(context, settings)
+        await this.createTimer(context, settings)
+    }
+
+    async createTimer(context, settings) {
         if (this.timers.has(context)) {
             return
         }
+        let period = 300000;
+        if (settings.hasOwnProperty('period')) {
+            period = settings["period"] * 60000;
+        }
+        console.log('create timer', context, period)
         const interval = setInterval(async () => {
             await this.updateViews(context, settings)
-        }, 180000)
+        }, period)
 
         this.timers.set(context, interval)
     }
