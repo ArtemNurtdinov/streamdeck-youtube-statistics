@@ -41,7 +41,6 @@ class BaseAction {
     }
 
     async updateViews(context, settings) {
-        console.log('updateViews', context)
     }
 
     async updateTimer(context, settings) {
@@ -53,11 +52,11 @@ class BaseAction {
         if (this.timers.has(context)) {
             return
         }
-        let period = 300000;
+        let period = 0;
         if (settings.hasOwnProperty('period')) {
             period = settings["period"] * 60000;
         }
-        console.log('create timer', context, period)
+        if (period < 60000) period = 300000
         const interval = setInterval(async () => {
             await this.updateViews(context, settings)
         }, period)
