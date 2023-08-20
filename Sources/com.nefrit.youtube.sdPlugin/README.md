@@ -17,6 +17,7 @@ The plugin provides information on the number of video views, likes, and comment
   - Videos count
 - Track YouTube stream statistics:
   - Current online
+- Customize refresh period
 - Statistics refresh every 3 minutes
 - Pressing the button will open the corresponding video/channel
 - Cross-platform (macOS, Windows)
@@ -24,6 +25,12 @@ The plugin provides information on the number of video views, likes, and comment
 ![](screenshot.png)
 
 # Changes
+## 1.1.0
+* Track the current count of online viewers for YouTube translations.
+* Open a YouTube channel, video, or stream by pressing the action.
+* Ability to modify the update interval.
+* The default interval value has been updated from 3 minutes to 5 minutes.
+
 ## 1.0.0
 * We have finally released the plugin!
 
