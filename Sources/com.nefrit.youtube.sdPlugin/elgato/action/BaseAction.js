@@ -48,7 +48,7 @@ class BaseAction {
         }
         const interval = setInterval(async () => {
             await this.updateViews(context, settings)
-        }, 20000)
+        }, 180000)
 
         this.timers.set(context, interval)
     }
