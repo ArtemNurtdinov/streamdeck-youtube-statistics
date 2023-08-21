@@ -19,7 +19,7 @@ class Elgato {
 
         this.subsAction = new SubsAction(titleUpdater, urlOpener, youtube)
         this.channelViewsAction = new ChannelViewsAction(titleUpdater, urlOpener, youtube)
-        this.channedVideosAction = new ChannelVideosAction(titleUpdater, urlOpener, youtube)
+        this.channelVideosAction = new ChannelVideosAction(titleUpdater, urlOpener, youtube)
 
         this.streamOnlineAction = new StreamOnlineAction(titleUpdater, urlOpener, youtube)
 
@@ -33,7 +33,7 @@ class Elgato {
         this.websocket.onmessage = (evt) => {
             const jsonObj = JSON.parse(evt.data);
             const event = jsonObj['event'];
-            const action = jsonObj['action'];
+            const actionJson = jsonObj['action'];
             const context = jsonObj['context'];
 
             const jsonPayload = jsonObj && jsonObj['payload'];
@@ -41,141 +41,50 @@ class Elgato {
             const coordinates = jsonPayload && jsonPayload['coordinates'];
             const userDesiredState = jsonPayload && jsonPayload['userDesiredState'];
 
-            switch (action) {
+            let action
+
+            switch (actionJson) {
                 case ViewsAction.ACTION_UUID:
-                    switch (event) {
-                        case "keyDown":
-                            this.viewsAction.onKeyDown(context, settings, coordinates, userDesiredState);
-                            break;
-                        case "keyUp":
-                            this.viewsAction.onKeyUp(context, settings, coordinates, userDesiredState);
-                            break;
-                        case "willAppear":
-                            this.viewsAction.onWillAppear(context, settings, coordinates);
-                            break;
-                        case "willDisappear":
-                            this.viewsAction.onWillDisappear(context, settings, coordinates);
-                            break;
-                        case "didReceiveSettings":
-                            this.viewsAction.didReceiveSettings(context, settings, coordinates);
-                            break
-                    }
+                    action = this.viewsAction
                     break;
                 case LikesAction.ACTION_UUID:
-                    switch (event) {
-                        case "keyDown":
-                            this.likesAction.onKeyDown(context, settings, coordinates, userDesiredState);
-                            break;
-                        case "keyUp":
-                            this.likesAction.onKeyUp(context, settings, coordinates, userDesiredState);
-                            break;
-                        case "willAppear":
-                            this.likesAction.onWillAppear(context, settings, coordinates);
-                            break;
-                        case "willDisappear":
-                            this.likesAction.onWillDisappear(context, settings, coordinates);
-                            break;
-                        case "didReceiveSettings":
-                            this.likesAction.didReceiveSettings(context, settings, coordinates);
-                            break
-                    }
+                    action = this.likesAction
                     break;
                 case CommentsAction.ACTION_UUID:
-                    switch (event) {
-                        case "keyDown":
-                            this.commentsAction.onKeyDown(context, settings, coordinates, userDesiredState);
-                            break;
-                        case "keyUp":
-                            this.commentsAction.onKeyUp(context, settings, coordinates, userDesiredState);
-                            break;
-                        case "willAppear":
-                            this.commentsAction.onWillAppear(context, settings, coordinates);
-                            break;
-                        case "willDisappear":
-                            this.commentsAction.onWillDisappear(context, settings, coordinates);
-                            break;
-                        case "didReceiveSettings":
-                            this.commentsAction.didReceiveSettings(context, settings, coordinates);
-                            break
-                    }
+                    action = this.commentsAction
                     break;
                 case SubsAction.ACTION_UUID:
-                    switch (event) {
-                        case "keyDown":
-                            this.subsAction.onKeyDown(context, settings, coordinates, userDesiredState);
-                            break;
-                        case "keyUp":
-                            this.subsAction.onKeyUp(context, settings, coordinates, userDesiredState);
-                            break;
-                        case "willAppear":
-                            this.subsAction.onWillAppear(context, settings, coordinates);
-                            break;
-                        case "willDisappear":
-                            this.subsAction.onWillDisappear(context, settings, coordinates);
-                            break;
-                        case "didReceiveSettings":
-                            this.subsAction.didReceiveSettings(context, settings, coordinates);
-                            break
-                    }
-                    break;
+                    action = this.subsAction
+                    break
                 case ChannelViewsAction.ACTION_UUID:
-                    switch (event) {
-                        case "keyDown":
-                            this.channelViewsAction.onKeyDown(context, settings, coordinates, userDesiredState);
-                            break;
-                        case "keyUp":
-                            this.channelViewsAction.onKeyUp(context, settings, coordinates, userDesiredState);
-                            break;
-                        case "willAppear":
-                            this.channelViewsAction.onWillAppear(context, settings, coordinates);
-                            break;
-                        case "willDisappear":
-                            this.channelViewsAction.onWillDisappear(context, settings, coordinates);
-                            break;
-                        case "didReceiveSettings":
-                            this.channelViewsAction.didReceiveSettings(context, settings, coordinates);
-                            break
-                    }
-                    break;
+                    action = this.channelViewsAction
+                    break
                 case ChannelVideosAction.ACTION_UUID:
-                    switch (event) {
-                        case "keyDown":
-                            this.channedVideosAction.onKeyDown(context, settings, coordinates, userDesiredState);
-                            break;
-                        case "keyUp":
-                            this.channedVideosAction.onKeyUp(context, settings, coordinates, userDesiredState);
-                            break;
-                        case "willAppear":
-                            this.channedVideosAction.onWillAppear(context, settings, coordinates);
-                            break;
-                        case "willDisappear":
-                            this.channedVideosAction.onWillDisappear(context, settings, coordinates);
-                            break;
-                        case "didReceiveSettings":
-                            this.channedVideosAction.didReceiveSettings(context, settings, coordinates);
-                            break
-                    }
-                    break;
+                    action = this.channelVideosAction
+                    break
                 case StreamOnlineAction.ACTION_UUID:
-                    switch (event) {
-                        case "keyDown":
-                            this.streamOnlineAction.onKeyDown(context, settings, coordinates, userDesiredState);
-                            break;
-                        case "keyUp":
-                            this.streamOnlineAction.onKeyUp(context, settings, coordinates, userDesiredState);
-                            break;
-                        case "willAppear":
-                            this.streamOnlineAction.onWillAppear(context, settings, coordinates);
-                            break;
-                        case "willDisappear":
-                            this.streamOnlineAction.onWillDisappear(context, settings, coordinates);
-                            break;
-                        case "didReceiveSettings":
-                            this.streamOnlineAction.didReceiveSettings(context, settings, coordinates);
-                            break
-                    }
+                    action = this.streamOnlineAction
+                    break
+            }
+
+            switch (event) {
+                case BaseAction.ACTION_EVENT_KEY_DOWN:
+                    action.onKeyDown(context, settings, coordinates, userDesiredState);
+                    break;
+                case BaseAction.ACTION_EVENT_KEY_UP:
+                    action.onKeyUp(context, settings, coordinates, userDesiredState);
+                    break;
+                case BaseAction.ACTION_EVENT_WILL_APPEAR:
+                    action.onWillAppear(context, settings, coordinates);
+                    break;
+                case BaseAction.ACTION_EVENT_WILL_DISAPPEAR:
+                    action.onWillDisappear(context, settings, coordinates);
+                    break;
+                case BaseAction.ACTION_EVENT_DID_RECEIVE_SETTINGS:
+                    action.didReceiveSettings(context, settings, coordinates);
                     break;
             }
+
         }
     }
 

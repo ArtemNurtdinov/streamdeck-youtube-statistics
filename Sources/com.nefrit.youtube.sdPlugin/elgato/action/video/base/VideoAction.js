@@ -8,13 +8,28 @@ class VideoAction extends BaseAction {
         this.interval = null;
     }
 
-    async onKeyDown(context, settings, coordinates, userDesiredState) {}
+    async onKeyDown(context, settings, coordinates, userDesiredState) {
+        await super.onKeyDown(context, settings, coordinates, userDesiredState)
+    }
 
     async onKeyUp(context, settings, coordinates, userDesiredState) {
+        await super.onKeyUp(context, settings, coordinates, userDesiredState)
         let youtubeVideo = this.getYoutubeVideo(settings)
         if (!youtubeVideo) return
         const url = this.youtube.getYoutubeVideoURL(youtubeVideo)
         this.urlOpener.open(url)
+    }
+
+    async onWillAppear(context, settings, coordinates) {
+        await super.onWillAppear(context, settings, coordinates)
+    }
+
+    async onWillDisappear(context, settings, coordinates) {
+        await super.onWillDisappear(context, settings, coordinates)
+    }
+
+    async didReceiveSettings(context, settings) {
+        await super.didReceiveSettings(context, settings)
     }
 
     async updateViews(context, settings) {

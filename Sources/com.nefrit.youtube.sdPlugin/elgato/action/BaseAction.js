@@ -1,29 +1,19 @@
 class BaseAction {
 
+    static ACTION_EVENT_KEY_DOWN = "keyDown"
+    static ACTION_EVENT_KEY_UP = "keyUp"
+    static ACTION_EVENT_WILL_APPEAR = "willAppear"
+    static ACTION_EVENT_WILL_DISAPPEAR = "willDisappear"
+    static ACTION_EVENT_DID_RECEIVE_SETTINGS = "didReceiveSettings"
+
     constructor() {
         this.timers = new Map()
     }
 
-    getYouTubeAPIKey(settings) {
-        let apiKey = "";
-        if (settings.hasOwnProperty('apiKey')) {
-            apiKey = settings["apiKey"];
-        }
-        return apiKey
+    async onKeyDown(context, settings, coordinates, userDesiredState) {
     }
 
-    formatNumber(numberString) {
-        let number = parseInt(numberString);
-
-        if (number >= 1000000) {
-            number = (number / 1000000).toFixed(2) + "M";
-        } else if (number >= 100000) {
-            number = (number / 1000).toFixed(1) + "K";
-        } else if (number >= 10000) {
-            number = (number / 1000).toFixed(2) + "K";
-        }
-
-        return number;
+    async onKeyUp(context, settings, coordinates, userDesiredState) {
     }
 
     async onWillAppear(context, settings, coordinates) {
@@ -71,5 +61,27 @@ class BaseAction {
         const interval = this.timers.get(context)
         clearInterval(interval)
         this.timers.delete(context)
+    }
+
+    getYouTubeAPIKey(settings) {
+        let apiKey = "";
+        if (settings.hasOwnProperty('apiKey')) {
+            apiKey = settings["apiKey"];
+        }
+        return apiKey
+    }
+
+    formatNumber(numberString) {
+        let number = parseInt(numberString);
+
+        if (number >= 1000000) {
+            number = (number / 1000000).toFixed(2) + "M";
+        } else if (number >= 100000) {
+            number = (number / 1000).toFixed(1) + "K";
+        } else if (number >= 10000) {
+            number = (number / 1000).toFixed(2) + "K";
+        }
+
+        return number;
     }
 }
