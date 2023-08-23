@@ -1,11 +1,11 @@
 {
   "Actions": [
     {
-      "Icon": "assets/youtube",
+      "Icon": "assets/categoryIcon",
       "Name": "Video views count",
       "States": [
         {
-          "Image": "assets/youtube",
+          "Image": "assets/categoryIcon",
           "TitleAlignment": "middle",
           "FontSize": "14"
         }
@@ -14,11 +14,11 @@
       "UUID": "com.nefrit.youtube.views"
     },
     {
-      "Icon": "assets/youtube",
+      "Icon": "assets/categoryIcon",
       "Name": "Video likes count",
       "States": [
         {
-          "Image": "assets/youtube",
+          "Image": "assets/categoryIcon",
           "TitleAlignment": "middle",
           "FontSize": "14"
         }
@@ -27,11 +27,11 @@
       "UUID": "com.nefrit.youtube.likes"
     },
     {
-      "Icon": "assets/youtube",
+      "Icon": "assets/categoryIcon",
       "Name": "Video comments count",
       "States": [
         {
-          "Image": "assets/youtube",
+          "Image": "assets/categoryIcon",
           "TitleAlignment": "middle",
           "FontSize": "14"
         }
@@ -40,11 +40,11 @@
       "UUID": "com.nefrit.youtube.comments"
     },
     {
-      "Icon": "assets/youtube",
+      "Icon": "assets/categoryIcon",
       "Name": "Channel subscribers count",
       "States": [
         {
-          "Image": "assets/youtube",
+          "Image": "assets/categoryIcon",
           "TitleAlignment": "middle",
           "FontSize": "14"
         }
@@ -53,11 +53,11 @@
       "UUID": "com.nefrit.youtube.subscribers"
     },
     {
-      "Icon": "assets/youtube",
+      "Icon": "assets/categoryIcon",
       "Name": "Channel views count",
       "States": [
         {
-          "Image": "assets/youtube",
+          "Image": "assets/categoryIcon",
           "TitleAlignment": "middle",
           "FontSize": "14"
         }
@@ -66,11 +66,11 @@
       "UUID": "com.nefrit.youtube.channel.views"
     },
     {
-      "Icon": "assets/youtube",
+      "Icon": "assets/categoryIcon",
       "Name": "Channel videos count",
       "States": [
         {
-          "Image": "assets/youtube",
+          "Image": "assets/categoryIcon",
           "TitleAlignment": "middle",
           "FontSize": "14"
         }
@@ -79,11 +79,11 @@
       "UUID": "com.nefrit.youtube.channel.videos"
     },
     {
-      "Icon": "assets/youtube",
+      "Icon": "assets/categoryIcon",
       "Name": "Stream online count",
       "States": [
         {
-          "Image": "assets/youtube",
+          "Image": "assets/categoryIcon",
           "TitleAlignment": "middle",
           "FontSize": "14"
         }
@@ -97,12 +97,12 @@
   "CodePath": "code.html", 
   "Description": "Get YouTube statistics for videos and channels. The plugin can show you the number of video views, likes, and comments, as well as the number of channel views, videos, and subscribers.",
   "Name": "YouTube Stats Tracker",
-  "Icon": "assets/youtube",
-  "Version": "1.0.0",
+  "Icon": "assets/categoryIcon",
+  "Version": "1.1.2",
   "PropertyInspectorPath": "index_pi.html",
   "URL": "https://github.com/ArtemNeFRiT/elgato-youtube-statistics",
   "Category": "YouTube Stats Tracker",
-  "CategoryIcon": "logo_124",
+  "CategoryIcon": "assets/categoryIcon",
   "OS": [
     {
         "Platform": "mac", 
