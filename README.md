@@ -19,11 +19,18 @@ The plugin provides information on the number of video views, likes, and comment
 - Track YouTube stream statistics:
   - Current count of online viewers
 - Customize refresh period
-- Statistics refresh every 3 minutes
 - Pressing the button will open the corresponding video/channel
 - Cross-platform (macOS, Windows)
 
 ![](Sources/com.nefrit.youtube.sdPlugin/screenshot.png)
+
+# Plugin Installation
+
+- Download the [latest version](https://github.com/ArtemNeFRiT/elgato-youtube-statistics/releases/latest) of the plugin.
+- Unzip it and place it in the specified folder:
+  - Windows: `C:\Users\%USER%\AppData\Roaming\Elgato\StreamDeck\Plugins`
+  - macOS: `~/Library/Application Support/com.elgato.StreamDeck/Plugins/`
+- Restart your Stream Deck. Enjoy!
 
 # Changes
 ## 1.1.0
