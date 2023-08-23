@@ -26,6 +26,10 @@ The plugin provides information on the number of video views, likes, and comment
 ![](screenshot.png)
 
 # Changes
+## 1.1.2
+* removed any leftover code
+* optimized plugin
+
 ## 1.1.0
 * Track the current count of online viewers for YouTube translations.
 * Open a YouTube channel, video, or stream by pressing the action.
