@@ -19,7 +19,6 @@ The plugin provides information on the number of video views, likes, and comment
 - Track YouTube stream statistics:
   - Current online
 - Customize refresh period
-- Statistics refresh every 3 minutes
 - Pressing the button will open the corresponding video/channel
 - Cross-platform (macOS, Windows)
 
