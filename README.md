@@ -27,7 +27,7 @@ The plugin provides information on the number of video views, likes, and comment
 # Plugin Installation
 
 - Download the [latest version](https://github.com/ArtemNeFRiT/elgato-youtube-statistics/releases/latest) of the plugin.
-- Unzip it and place it in the specified folder:
+- Unzip it and place `com.nefrit.youtube.sdPlugin` from `Sources` folder in the specified folder:
   - Windows: `C:\Users\%USER%\AppData\Roaming\Elgato\StreamDeck\Plugins`
   - macOS: `~/Library/Application Support/com.elgato.StreamDeck/Plugins/`
 - Restart your Stream Deck. Enjoy!
