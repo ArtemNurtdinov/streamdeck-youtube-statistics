@@ -1,6 +1,6 @@
 `Youtube Stats Tracker` will help you track the statistics of a video, channel or stream on YouTube.
 
-![](Sources/com.nefrit.youtube.sdPlugin/preview/preview.png)
+![](Sources/com.nefrit.youtube.sdPlugin/previews/preview.png)
 
 # Description
 
