@@ -5,7 +5,7 @@
       "Name": "Video views",
       "States": [
         {
-          "Image": "assets/categoryIcon",
+          "Image": "assets/actionIcon",
           "TitleAlignment": "middle",
           "FontSize": "14"
         }
@@ -18,7 +18,7 @@
       "Name": "Video likes",
       "States": [
         {
-          "Image": "assets/categoryIcon",
+          "Image": "assets/actionIcon",
           "TitleAlignment": "middle",
           "FontSize": "14"
         }
@@ -31,7 +31,7 @@
       "Name": "Video comments",
       "States": [
         {
-          "Image": "assets/categoryIcon",
+          "Image": "assets/actionIcon",
           "TitleAlignment": "middle",
           "FontSize": "14"
         }
@@ -44,7 +44,7 @@
       "Name": "Channel subscribers",
       "States": [
         {
-          "Image": "assets/categoryIcon",
+          "Image": "assets/actionIcon",
           "TitleAlignment": "middle",
           "FontSize": "14"
         }
@@ -57,7 +57,7 @@
       "Name": "Channel views",
       "States": [
         {
-          "Image": "assets/categoryIcon",
+          "Image": "assets/actionIcon",
           "TitleAlignment": "middle",
           "FontSize": "14"
         }
@@ -70,7 +70,7 @@
       "Name": "Channel videos",
       "States": [
         {
-          "Image": "assets/categoryIcon",
+          "Image": "assets/actionIcon",
           "TitleAlignment": "middle",
           "FontSize": "14"
         }
@@ -83,7 +83,7 @@
       "Name": "Stream online",
       "States": [
         {
-          "Image": "assets/categoryIcon",
+          "Image": "assets/actionIcon",
           "TitleAlignment": "middle",
           "FontSize": "14"
         }
@@ -97,12 +97,12 @@
   "CodePath": "code.html", 
   "Description": "Get YouTube statistics for videos and channels. The plugin can show you the number of video views, likes, and comments, as well as the number of channel views, videos, and subscribers.",
   "Name": "YouTube Stats Tracker",
-  "Icon": "assets/categoryIcon",
+  "Icon": "assets/pluginIcon",
   "Version": "1.2.0",
   "PropertyInspectorPath": "index_pi.html",
   "URL": "https://github.com/ArtemNeFRiT/elgato-youtube-statistics",
   "Category": "YouTube Stats Tracker",
-  "CategoryIcon": "assets/categoryIcon1",
+  "CategoryIcon": "assets/categoryIcon",
   "OS": [
     {
         "Platform": "mac", 
