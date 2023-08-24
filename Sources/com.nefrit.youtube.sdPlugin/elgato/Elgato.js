@@ -21,8 +21,6 @@ class Elgato {
         this.channelViewsAction = new ChannelViewsAction(titleUpdater, urlOpener, youtube)
         this.channelVideosAction = new ChannelVideosAction(titleUpdater, urlOpener, youtube)
 
-        this.streamOnlineAction = new StreamOnlineAction(titleUpdater, urlOpener, youtube)
-
         this.currentStreamAction = new CurrentStreamAction(titleUpdater, urlOpener, youtube)
 
         this.websocket.onopen = () => {
@@ -63,9 +61,6 @@ class Elgato {
                     break
                 case ChannelVideosAction.ACTION_UUID:
                     action = this.channelVideosAction
-                    break
-                case StreamOnlineAction.ACTION_UUID:
-                    action = this.streamOnlineAction
                     break
                 case CurrentStreamAction.ACTION_UUID:
                     action = this.currentStreamAction

@@ -6,7 +6,6 @@ class Youtube {
     constructor() {
         this.videoStatLoader = new VideoStatLoader()
         this.channelStatLoader = new ChannelStatLoader()
-        this.streamStatLoader = new StreamStatLoader()
         this.currentStreamStatLoader = new CurrentStreamStatLoader()
     }
 
@@ -16,10 +15,6 @@ class Youtube {
 
     async loadChannelStat(apiKey, channelId) {
         return this.channelStatLoader.loadChannelStat(apiKey, channelId)
-    }
-
-    async loadStreamStatistic(apiKey, streamId) {
-        return this.streamStatLoader.loadStreamStat(apiKey, streamId)
     }
 
     async loadCurrentStreamStatistic(apiKey, channelId) {
