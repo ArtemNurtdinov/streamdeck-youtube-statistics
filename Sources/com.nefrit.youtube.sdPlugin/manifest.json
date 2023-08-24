@@ -95,7 +95,7 @@
   "SDKVersion": 2,
   "Author": "ArtemNeFRiT",
   "CodePath": "code.html", 
-  "Description": "Get YouTube statistics for videos and channels. The plugin can show you the number of video views, likes, and comments, as well as the number of channel views, videos, and subscribers.",
+  "Description": "With this plugin you can easily track the statistic of your favorite channel, YouTube video or stream.",
   "Name": "YouTube Stats Tracker",
   "Icon": "assets/pluginIcon",
   "Version": "1.2.0",
