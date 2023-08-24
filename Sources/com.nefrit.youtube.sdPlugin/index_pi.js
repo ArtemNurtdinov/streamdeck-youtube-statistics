@@ -32,6 +32,11 @@ function saveYoutubeStreamClicked() {
     $PI.setSettings({'apiKey': apiKey, 'period': period, 'youtubeStream': youtubeStream});
 }
 
+function openDocumentationClicked() {
+    const url = 'https://github.com/ArtemNeFRiT/streamdeck-youtube-statistics#Configuration'
+    $PI.openUrl(url)
+}
+
 function initPropertyInspector() {
     let actionUUID = $PI.actionInfo.action;
     if (actionUUID == 'com.nefrit.youtube.views' || actionUUID == 'com.nefrit.youtube.likes' || actionUUID == 'com.nefrit.youtube.comments') {

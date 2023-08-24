@@ -1745,3 +1745,9 @@ select {
 .context-menu_message {
     cursor: default;
 }
+
+.sdpi-item-value a {
+    color: steelblue;
+    text-decoration: underline;
+    cursor: pointer;
+}

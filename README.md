@@ -33,6 +33,10 @@ The plugin provides information on the number of video views, likes, and comment
 - Restart your Stream Deck. Enjoy!
 
 # Changes
+## 1.2.0
+* Updated previews and icons for actions.
+* Included a link to the documentation in the property inspector.
+
 ## 1.1.2
 * removed any leftover code
 * optimized plugin
