@@ -19,7 +19,9 @@ class CurrentStreamAction extends BaseAction {
         let youtubeChannel = this.getYoutubeChannel(settings)
         if (!apiKey && !youtubeChannel) return;
         const url = await this.youtube.getCurrentStreamUrlByChannelId(apiKey, youtubeChannel)
-        this.urlOpener.open(url)
+        if (url) {
+            this.urlOpener.open(url)
+        }
     }
 
     async onWillAppear(context, settings, coordinates) {
@@ -46,6 +48,11 @@ class CurrentStreamAction extends BaseAction {
         if (!youtubeChannel && !apiKey) return
 
         const streamStat = await this.youtube.loadCurrentStreamStatistic(apiKey, youtubeChannel)
-        this.titleUpdater.updateTitle(context, this.formatNumber(this.getStreamValue(streamStat)))
+
+        if (streamStat.online) {
+            this.titleUpdater.updateTitle(context, this.formatNumber(this.getStreamValue(streamStat)))
+        } else {
+
+        }
     }
 }

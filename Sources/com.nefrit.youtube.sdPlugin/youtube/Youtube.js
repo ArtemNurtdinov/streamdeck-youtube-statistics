@@ -32,13 +32,6 @@ class Youtube {
         return this.CHANNEL_URL_FORMAT + youtubeChannel
     }
 
-    getYoutubeStreamURL(youtubeStream) {
-        if (youtubeStream.includes("youtube.com")) {
-            return youtubeStream
-        }
-        return this.VIDEO_URL_FORMAT + youtubeStream
-    }
-
     async getCurrentStreamUrlByChannelId(apiKey, channelId) {
         const streamId = await this.currentStreamStatLoader.loadCurrentStreamID(apiKey, channelId)
         return this.VIDEO_URL_FORMAT + streamId
