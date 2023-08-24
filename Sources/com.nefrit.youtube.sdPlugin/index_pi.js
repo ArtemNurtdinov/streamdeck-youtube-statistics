@@ -57,6 +57,12 @@ function initPropertyInspector() {
         document.getElementById("youtubeChannelInputView").style.display = "none"
         document.getElementById("youtubeChannelButtonView").style.display = "none"
     }
+    if (actionUUID == 'com.nefrit.youtube.current.stream.online') {
+        document.getElementById("youtubeVideoInputView").style.display = "none"
+        document.getElementById("youtubeVideoButtonView").style.display = "none"
+        document.getElementById("youtubeStreamInputView").style.display = "none"
+        document.getElementById("youtubeStreamButtonView").style.display = "none"
+    }
 }
 
 function sendValueToPlugin(value, param) {

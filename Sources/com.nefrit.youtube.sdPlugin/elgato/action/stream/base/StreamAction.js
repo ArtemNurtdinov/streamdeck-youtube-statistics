@@ -41,7 +41,7 @@ class StreamAction extends BaseAction {
         if (settings == null) return
         const apiKey = this.getYouTubeAPIKey(settings)
         const youtubeStream = this.getYoutubeStream(settings)
-        if (!youtubeStream || !apiKey) return
+        if (!youtubeStream && !apiKey) return
 
         const streamStat = await this.youtube.loadStreamStatistic(apiKey, youtubeStream);
         this.titleUpdater.updateTitle(context, this.formatNumber(this.getStreamValue(streamStat)));

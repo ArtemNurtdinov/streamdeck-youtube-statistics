@@ -86,4 +86,12 @@ class BaseAction {
 
         return number;
     }
+
+    getYoutubeChannel(settings) {
+        let youtubeChannel = "";
+        if (settings.hasOwnProperty("youtubeChannelId")) {
+            youtubeChannel = settings["youtubeChannelId"];
+        }
+        return youtubeChannel
+    }
 }

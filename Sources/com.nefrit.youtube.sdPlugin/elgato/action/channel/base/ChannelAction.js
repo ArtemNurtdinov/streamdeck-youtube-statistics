@@ -45,12 +45,4 @@ class ChannelAction extends BaseAction {
     getChannelValue(channelStat) {
         return null;
     }
-
-    getYoutubeChannel(settings) {
-        let youtubeChannel = "";
-        if (settings.hasOwnProperty("youtubeChannelId")) {
-            youtubeChannel = settings["youtubeChannelId"];
-        }
-        return youtubeChannel
-    }
 }

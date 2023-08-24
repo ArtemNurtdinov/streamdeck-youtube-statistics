@@ -90,6 +90,19 @@
       ],
       "SupportedInMultiActions": false,
       "UUID": "com.nefrit.youtube.stream.online"
+    },
+    {
+      "Icon": "assets/actionStreamIcon",
+      "Name": "Current stream online",
+      "States": [
+        {
+          "Image": "assets/actionIcon",
+          "TitleAlignment": "middle",
+          "FontSize": "14"
+        }
+      ],
+      "SupportedInMultiActions": false,
+      "UUID": "com.nefrit.youtube.current.stream.online"
     }
   ], 
   "SDKVersion": 2,

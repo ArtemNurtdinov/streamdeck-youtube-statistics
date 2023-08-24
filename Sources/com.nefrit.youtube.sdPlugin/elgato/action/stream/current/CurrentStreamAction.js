@@ -1,4 +1,5 @@
-class VideoAction extends BaseAction {
+class CurrentStreamAction extends BaseAction {
+    static ACTION_UUID = "com.nefrit.youtube.current.stream.online"
 
     constructor(titleUpdater, urlOpener, youtube) {
         super();
@@ -9,14 +10,16 @@ class VideoAction extends BaseAction {
     }
 
     async onKeyDown(context, settings, coordinates, userDesiredState) {
-        await super.onKeyDown(context, settings, coordinates, userDesiredState)
+        await super.onKeyDown(context, settings, coordinates, userDesiredState);
     }
 
     async onKeyUp(context, settings, coordinates, userDesiredState) {
         await super.onKeyUp(context, settings, coordinates, userDesiredState)
-        let youtubeVideo = this.getYoutubeVideo(settings)
-        if (!youtubeVideo) return
-        const url = this.youtube.getYoutubeVideoURL(youtubeVideo)
+        const apiKey = this.getYouTubeAPIKey(settings)
+        let youtubeChannel = this.getYoutubeChannel(settings)
+        if (!apiKey && !youtubeChannel) return;
+
+        const url = this.youtube.getCurrentStreamUrlByChannelId(apiKey, youtubeChannel)
         this.urlOpener.open(url)
     }
 
@@ -32,26 +35,18 @@ class VideoAction extends BaseAction {
         await super.didReceiveSettings(context, settings)
     }
 
+    getStreamValue(streamStat) {
+        return streamStat.concurrentViewers
+    }
+
     async updateViews(context, settings) {
         await super.updateViews(context, settings)
         if (settings == null) return
         const apiKey = this.getYouTubeAPIKey(settings)
-        const youtubeVideo = this.getYoutubeVideo(settings)
-        if (!youtubeVideo && !apiKey) return
+        let youtubeChannel = this.getYoutubeChannel(settings)
+        if (!youtubeChannel && !apiKey) return
 
-        const videoStat = await this.youtube.loadVideoStatistic(apiKey, youtubeVideo);
-        this.titleUpdater.updateTitle(context, this.formatNumber(this.getVideoValue(videoStat)));
-    }
-
-    getVideoValue(channelStat) {
-        return null;
-    }
-
-    getYoutubeVideo(settings) {
-        let youtubeVideo = "";
-        if (settings.hasOwnProperty('youtubeVideo')) {
-            youtubeVideo = settings["youtubeVideo"];
-        }
-        return youtubeVideo
+        const streamStat = await this.youtube.loadCurrentStreamStatistic(apiKey, youtubeChannel)
+        this.titleUpdater.updateTitle(context, this.formatNumber(this.getStreamValue(streamStat)))
     }
 }

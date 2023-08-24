@@ -7,18 +7,23 @@ class Youtube {
         this.videoStatLoader = new VideoStatLoader()
         this.channelStatLoader = new ChannelStatLoader()
         this.streamStatLoader = new StreamStatLoader()
+        this.currentStreamStatLoader = new CurrentStreamStatLoader()
     }
 
-    loadVideoStatistic(apiKey, video) {
+    async loadVideoStatistic(apiKey, video) {
         return this.videoStatLoader.loadVideoStat(apiKey, video)
     }
 
-    loadChannelStat(apiKey, channelId) {
+    async loadChannelStat(apiKey, channelId) {
         return this.channelStatLoader.loadChannelStat(apiKey, channelId)
     }
 
-    loadStreamStatistic(apiKey, streamId) {
+    async loadStreamStatistic(apiKey, streamId) {
         return this.streamStatLoader.loadStreamStat(apiKey, streamId)
+    }
+
+    async loadCurrentStreamStatistic(apiKey, channelId) {
+        return this.currentStreamStatLoader.loadCurrentStreamStat(apiKey, channelId)
     }
 
     getYoutubeVideoURL(youtubeVideo) {
@@ -37,5 +42,10 @@ class Youtube {
             return youtubeStream
         }
         return this.VIDEO_URL_FORMAT + youtubeStream
+    }
+
+    async getCurrentStreamUrlByChannelId(apiKey, channelId) {
+        const streamId = await this.currentStreamStatLoader.loadCurrentStreamStat(apiKey, channelId)
+        return this.VIDEO_URL_FORMAT + streamId
     }
 }
