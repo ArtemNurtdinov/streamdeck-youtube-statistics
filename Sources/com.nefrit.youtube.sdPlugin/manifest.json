@@ -93,7 +93,7 @@
     },
     {
       "Icon": "assets/actionStreamIcon",
-      "Name": "Current stream online",
+      "Name": "Channel stream online",
       "States": [
         {
           "Image": "assets/actionIcon",

@@ -18,8 +18,7 @@ class CurrentStreamAction extends BaseAction {
         const apiKey = this.getYouTubeAPIKey(settings)
         let youtubeChannel = this.getYoutubeChannel(settings)
         if (!apiKey && !youtubeChannel) return;
-
-        const url = this.youtube.getCurrentStreamUrlByChannelId(apiKey, youtubeChannel)
+        const url = await this.youtube.getCurrentStreamUrlByChannelId(apiKey, youtubeChannel)
         this.urlOpener.open(url)
     }
 

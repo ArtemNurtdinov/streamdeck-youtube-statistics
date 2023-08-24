@@ -23,6 +23,8 @@ class Elgato {
 
         this.streamOnlineAction = new StreamOnlineAction(titleUpdater, urlOpener, youtube)
 
+        this.currentStreamAction = new CurrentStreamAction(titleUpdater, urlOpener, youtube)
+
         this.websocket.onopen = () => {
             this.registerPlugin(pluginUUID, inRegisterEvent);
         };
@@ -64,6 +66,9 @@ class Elgato {
                     break
                 case StreamOnlineAction.ACTION_UUID:
                     action = this.streamOnlineAction
+                    break
+                case CurrentStreamAction.ACTION_UUID:
+                    action = this.currentStreamAction
                     break
             }
 

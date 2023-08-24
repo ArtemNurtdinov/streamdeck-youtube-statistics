@@ -45,7 +45,7 @@ class Youtube {
     }
 
     async getCurrentStreamUrlByChannelId(apiKey, channelId) {
-        const streamId = await this.currentStreamStatLoader.loadCurrentStreamStat(apiKey, channelId)
+        const streamId = await this.currentStreamStatLoader.loadCurrentStreamID(apiKey, channelId)
         return this.VIDEO_URL_FORMAT + streamId
     }
 }
