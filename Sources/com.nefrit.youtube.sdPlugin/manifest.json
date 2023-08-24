@@ -1,8 +1,8 @@
 {
   "Actions": [
     {
-      "Icon": "assets/categoryIcon",
-      "Name": "Video views count",
+      "Icon": "assets/actionVideoViewsIcon",
+      "Name": "Video views",
       "States": [
         {
           "Image": "assets/categoryIcon",
@@ -14,8 +14,8 @@
       "UUID": "com.nefrit.youtube.views"
     },
     {
-      "Icon": "assets/categoryIcon",
-      "Name": "Video likes count",
+      "Icon": "assets/actionLikesIcon",
+      "Name": "Video likes",
       "States": [
         {
           "Image": "assets/categoryIcon",
@@ -27,8 +27,8 @@
       "UUID": "com.nefrit.youtube.likes"
     },
     {
-      "Icon": "assets/categoryIcon",
-      "Name": "Video comments count",
+      "Icon": "assets/actionCommentsIcon",
+      "Name": "Video comments",
       "States": [
         {
           "Image": "assets/categoryIcon",
@@ -40,8 +40,8 @@
       "UUID": "com.nefrit.youtube.comments"
     },
     {
-      "Icon": "assets/categoryIcon",
-      "Name": "Channel subscribers count",
+      "Icon": "assets/actionSubscribersIcon",
+      "Name": "Channel subscribers",
       "States": [
         {
           "Image": "assets/categoryIcon",
@@ -53,8 +53,8 @@
       "UUID": "com.nefrit.youtube.subscribers"
     },
     {
-      "Icon": "assets/categoryIcon",
-      "Name": "Channel views count",
+      "Icon": "assets/actionChannelViewsIcon",
+      "Name": "Channel views",
       "States": [
         {
           "Image": "assets/categoryIcon",
@@ -66,8 +66,8 @@
       "UUID": "com.nefrit.youtube.channel.views"
     },
     {
-      "Icon": "assets/categoryIcon",
-      "Name": "Channel videos count",
+      "Icon": "assets/youtubeIcon",
+      "Name": "Channel videos",
       "States": [
         {
           "Image": "assets/categoryIcon",
@@ -79,8 +79,8 @@
       "UUID": "com.nefrit.youtube.channel.videos"
     },
     {
-      "Icon": "assets/categoryIcon",
-      "Name": "Stream online count",
+      "Icon": "assets/actionStreamIcon",
+      "Name": "Stream online",
       "States": [
         {
           "Image": "assets/categoryIcon",
@@ -102,7 +102,7 @@
   "PropertyInspectorPath": "index_pi.html",
   "URL": "https://github.com/ArtemNeFRiT/elgato-youtube-statistics",
   "Category": "YouTube Stats Tracker",
-  "CategoryIcon": "assets/categoryIcon",
+  "CategoryIcon": "assets/categoryIcon1",
   "OS": [
     {
         "Platform": "mac", 
