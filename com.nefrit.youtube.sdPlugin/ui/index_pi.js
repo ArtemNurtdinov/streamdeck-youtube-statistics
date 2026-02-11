@@ -83,8 +83,9 @@ function initPropertyInspector() {
         return;
     }
 
-    const isVideoAction = hasActionSuffix(actionUUID, 'views') || hasActionSuffix(actionUUID, 'likes') || hasActionSuffix(actionUUID, 'comments');
-    const isChannelAction = hasActionSuffix(actionUUID, 'subscribers') || hasActionSuffix(actionUUID, 'channel.views') || hasActionSuffix(actionUUID, 'channel.videos');
+    const isLastVideoViewsAction = hasActionSuffix(actionUUID, 'video.latest.views');
+    const isVideoAction = (hasActionSuffix(actionUUID, 'views') && !isLastVideoViewsAction) || hasActionSuffix(actionUUID, 'likes') || hasActionSuffix(actionUUID, 'comments');
+    const isChannelAction = hasActionSuffix(actionUUID, 'subscribers') || hasActionSuffix(actionUUID, 'channel.views') || hasActionSuffix(actionUUID, 'channel.videos') || isLastVideoViewsAction;
     const isStreamAction = hasActionSuffix(actionUUID, 'stream.online');
 
     if (isVideoAction) {

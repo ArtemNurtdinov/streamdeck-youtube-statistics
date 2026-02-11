@@ -41,6 +41,19 @@ type StreamStatisticsResponse = YouTubeError & {
     }>;
 };
 
+type LatestVideoSearchResponse = YouTubeError & {
+    items?: Array<{
+        id?: {
+            videoId?: string;
+        };
+    }>;
+};
+
+export type LatestVideoStat = {
+    videoId: string;
+    viewCount: string;
+};
+
 export class YoutubeService {
     async loadVideoStat(apiKey: string, videoInput: string): Promise<VideoStat> {
         const videoId = extractVideoId(videoInput);
@@ -89,6 +102,21 @@ export class YoutubeService {
             scheduledStartTime: result.scheduledStartTime,
             actualStartTime: result.actualStartTime,
             activeLiveChatId: result.activeLiveChatId,
+        };
+    }
+
+    async loadLatestVideo(apiKey: string, channelId: string): Promise<LatestVideoStat> {
+        const latestVideoUrl = `https://www.googleapis.com/youtube/v3/search?part=id&channelId=${encodeURIComponent(channelId)}&maxResults=1&order=date&type=video&key=${encodeURIComponent(apiKey)}`;
+        const latestVideoResponse = await this.fetchJSON<LatestVideoSearchResponse>(latestVideoUrl);
+        const videoId = latestVideoResponse.items?.[0]?.id?.videoId;
+        if (!videoId) {
+            throw new Error("Latest video not found for this channel.");
+        }
+
+        const stat = await this.loadVideoStat(apiKey, videoId);
+        return {
+            videoId,
+            viewCount: stat.viewCount,
         };
     }
 

@@ -15,6 +15,19 @@
       "UUID": "com.nefrit.youtube.views"
     },
     {
+      "Icon": "assets/actionVideoViewsIcon",
+      "Name": "Last video views",
+      "States": [
+        {
+          "Image": "assets/actionIcon",
+          "TitleAlignment": "middle",
+          "FontSize": 14
+        }
+      ],
+      "SupportedInMultiActions": false,
+      "UUID": "com.nefrit.youtube.video.latest.views"
+    },
+    {
       "Icon": "assets/actionLikesIcon",
       "Name": "Video likes",
       "States": [
