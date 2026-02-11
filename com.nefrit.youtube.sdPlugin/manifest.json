@@ -132,7 +132,7 @@
       "UUID": "com.nefrit.youtube.stream.online"
     }
   ],
-  "SDKVersion": 2,
+  "SDKVersion": 3,
   "Author": "ArtemNeFRiT",
   "CodePath": "bin/plugin.js",
   "Description": "With this plugin you can easily track the statistic of your favorite channel, YouTube video or stream.",
