@@ -113,7 +113,7 @@ npm run pack
 
 - `src/` - TypeScript source code
 - `com.nefrit.youtube.sdPlugin/` - distributable plugin bundle
-- `prepare-runtime.js` - copies required runtime dependencies into bundle
+- `rollup.config.mjs` - bundle config used to produce runtime `bin/plugin.js`
 
 ## About Author
 
