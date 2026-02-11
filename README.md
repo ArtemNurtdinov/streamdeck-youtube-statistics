@@ -109,10 +109,9 @@ Watch mode with auto restart:
 npm run dev
 ```
 
-Validation and packaging:
+Packaging:
 
 ```bash
-npm run validate
 npm run pack
 ```
 
@@ -125,9 +124,9 @@ npm run pack
 ## About Author
 
 - Email: `artem.nefrit@gmail.com`
-- GitHub: https://github.com/ArtemNeFRiT
+- GitHub: https://github.com/ArtemNurtdinov
 - Instagram: https://instagram.com/artem_nefrit?igshid=MjEwN2IyYWYwYw
-- LinkedIn: https://www.linkedin.com/in/artem-nefrit-a92851273/
+- LinkedIn: https://www.linkedin.com/in/artem-nurtdinov-a92851273/
 
 ## Donation
 
