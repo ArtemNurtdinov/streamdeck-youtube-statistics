@@ -81,7 +81,7 @@
     },
     {
       "Icon": "assets/actionStreamIcon",
-      "Name": "Stream online",
+      "Name": "Stream viewers",
       "States": [
         {
           "Image": "assets/actionIcon",
