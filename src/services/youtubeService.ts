@@ -49,9 +49,8 @@ type LatestVideoSearchResponse = YouTubeError & {
     }>;
 };
 
-export type LatestVideoStat = {
+export type LatestVideoStat = VideoStat & {
     videoId: string;
-    viewCount: string;
 };
 
 export class YoutubeService {
@@ -116,7 +115,7 @@ export class YoutubeService {
         const stat = await this.loadVideoStat(apiKey, videoId);
         return {
             videoId,
-            viewCount: stat.viewCount,
+            ...stat,
         };
     }
 
