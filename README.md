@@ -29,8 +29,15 @@ With this plugin you can track:
 ### 1.3.0
 
 - Migrated plugin runtime to Stream Deck SDK v2 with TypeScript.
-- Preserved plugin UUID `com.nefrit.youtube` and all existing action UUIDs.
-- Kept existing settings keys (`apiKey`, `period`, `youtubeVideo`, `youtubeChannelId`, `youtubeStream`).
+- Added new actions for latest uploaded video metrics:
+  - `Latest video views`
+  - `Latest video likes`
+  - `Latest video comments`
+- Updated `Stream viewers` action:
+  - now uses `Channel ID` instead of a direct stream link
+  - automatically detects active live stream
+  - shows `0` when no live stream is active
+- Updated action order in the picker for clearer grouping.
 
 ### 1.2.0
 
