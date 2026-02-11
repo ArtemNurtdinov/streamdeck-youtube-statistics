@@ -2,6 +2,8 @@
 
 `Youtube Stats Tracker` helps track statistics of a YouTube video, channel, or stream on Stream Deck.
 
+![](docs/images/1-preview.png)
+
 ## Description
 
 With this plugin you can track:
@@ -19,6 +21,8 @@ With this plugin you can track:
 - Custom refresh period
 - Open a video/channel/stream by pressing the key
 - Cross-platform support (macOS, Windows)
+
+![](docs/images/screenshot.png)
 
 ## Changes
 
@@ -51,6 +55,8 @@ With this plugin you can track:
 
 ## Configuration
 
+![](docs/images/screenshot3.png)
+
 ### API Key
 
 1. Open Google Cloud Console: https://console.cloud.google.com/
@@ -73,6 +79,8 @@ Use one of the following:
 2. Go to `About`.
 3. Click `Share`.
 4. Copy channel ID.
+
+![](docs/images/screenshot2.png)
 
 ### Stream
 
