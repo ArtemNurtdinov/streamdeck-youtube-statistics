@@ -115,12 +115,6 @@ Packaging:
 npm run pack
 ```
 
-## Project Structure
-
-- `src/` - TypeScript source code
-- `com.nefrit.youtube.sdPlugin/` - distributable plugin bundle
-- `rollup.config.mjs` - bundle config used to produce runtime `bin/plugin.js`
-
 ## About Author
 
 - Email: `artem.nefrit@gmail.com`
