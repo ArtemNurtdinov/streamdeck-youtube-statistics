@@ -1,117 +1,119 @@
-`Youtube Stats Tracker` will help you track the statistics of a video, channel or stream on YouTube.
+# YouTube Stats Tracker
 
-![](Sources/com.nefrit.youtube.sdPlugin/previews/1-preview.png)
+`Youtube Stats Tracker` helps track statistics of a YouTube video, channel, or stream on Stream Deck.
 
-# Description
+## Description
 
-With this plugin you can easily track the statistic of your favorite channel, YouTube video or stream.
+With this plugin you can track:
 
-The plugin provides information on the number of video views, likes, and comments, as well as the number of channel views, videos, and subscribers. Furthermore, it can display the viewer count during the live stream.
-
-- Track YouTube video statistics:
+- YouTube video statistics:
   - Views count
   - Likes count
   - Comments count
-- Track YouTube channel statistics:
+- YouTube channel statistics:
   - Subscribers count
   - Views count
   - Videos count
-- Track YouTube stream statistics:
-  - Current count of online viewers
-- Customize refresh period
-- Pressing the button will open the corresponding video/channel
-- Cross-platform (macOS, Windows)
+- YouTube stream statistics:
+  - Current online viewers
+- Custom refresh period
+- Open a video/channel/stream by pressing the key
+- Cross-platform support (macOS, Windows)
 
-![](Sources/com.nefrit.youtube.sdPlugin/screenshot.png)
+## Changes
 
-# Plugin Installation
+### 1.3.0
 
-- Download the [latest version](https://github.com/ArtemNeFRiT/elgato-youtube-statistics/releases/latest) of the plugin.
-- Unzip it and place `com.nefrit.youtube.sdPlugin` from `Sources` folder in the specified folder:
-  - Windows: `C:\Users\%USER%\AppData\Roaming\Elgato\StreamDeck\Plugins`
-  - macOS: `~/Library/Application Support/com.elgato.StreamDeck/Plugins/`
-- Restart your Stream Deck. Enjoy!
+- Migrated plugin runtime to Stream Deck SDK v2 with TypeScript.
+- Preserved plugin UUID `com.nefrit.youtube` and all existing action UUIDs.
+- Kept existing settings keys (`apiKey`, `period`, `youtubeVideo`, `youtubeChannelId`, `youtubeStream`).
 
-# Changes
-## 1.2.0
-* Updated previews and icons for actions.
-* Included a link to the documentation in the property inspector.
+### 1.2.0
 
-## 1.1.2
-* removed any leftover code
-* optimized plugin
+- Updated previews and icons for actions.
+- Included a link to the documentation in the property inspector.
 
-## 1.1.0
-* Track the current count of online viewers for YouTube translations.
-* Open a YouTube channel, video, or stream by pressing the action.
-* Ability to modify the update interval.
-* The default interval value has been updated from 3 minutes to 5 minutes.
+### 1.1.2
 
-## 1.0.0
-* We have finally released the plugin!
+- Removed leftover code.
+- Optimized plugin runtime.
 
-# Configuration
+### 1.1.0
 
-![](Sources/com.nefrit.youtube.sdPlugin/screenshot3.png)
+- Added current online viewers tracking for YouTube streams.
+- Added open-on-press behavior for video, channel, and stream actions.
+- Added configurable update interval.
+- Updated default interval from 3 minutes to 5 minutes.
 
-## API Key
+### 1.0.0
 
-- Go to the Google Cloud Platform website (https://console.cloud.google.com/).
+- Initial release.
 
-- Click on the `Sign In` button and log in to your Google account or create a new one if you don't have it yet.
+## Configuration
 
-- Create a new project by clicking on the `Create Project` button.
+### API Key
 
-- Enter a name for your project and select it from the list. Click on the `Create` button.
+1. Open Google Cloud Console: https://console.cloud.google.com/
+2. Sign in and create/select a project.
+3. Enable `YouTube Data API v3` in `APIs & Services -> Library`.
+4. Go to `APIs & Services -> Credentials`.
+5. Click `Create Credentials` and choose `API key`.
+6. Copy the key and paste it into the plugin settings.
 
-- After the project is created, you will be redirected to the project management page. On the left navigation panel, find and select `APIs & Services" and then "Library`.
+### Video
 
-- In the search field, type `YouTube Data API` and select it from the search results. Click on the `Enable` button.
+Use one of the following:
 
-- Go back to the project management page, select `APIs & Services` in the left navigation panel, and then `Credentials`.
+- Full YouTube video URL, for example: `https://www.youtube.com/watch?v=Yr_7sd3x-cQ`
+- Video ID
 
-- Click on the "Create Credentials" button and select `API key`.
+### Channel ID
 
-- You may need to create and configure your credentials. Follow the on-screen instructions and specify the credential type as `API key`.
+1. Open the YouTube channel.
+2. Go to `About`.
+3. Click `Share`.
+4. Copy channel ID.
 
-- After creating the API key, copy it and use it in the `Youtube Stats Tracker` plugin to access the Google API.
+### Stream
 
+Use one of the following:
 
-That's it! You now have a Google API key that can be used with the `Youtube Stats Tracker` plugin.
+- Full YouTube stream URL, for example: `https://www.youtube.com/watch?v=Yr_7sd3x-cQ`
+- Stream ID
 
+## Development
 
-## Video
+```bash
+npm install
+npm run build
+```
 
-- You have two options
-  - Link YouTube video (ex: `https://www.youtube.com/watch?v=Yr_7sd3x-cQ`)
-  - Link YouTube video id: `v=Yr_7sd3x-cQ`
+Watch mode with auto restart:
 
-## Channel ID
+```bash
+npm run dev
+```
 
-- Open the YouTube channel and click on `About`.
-- Click on the `Share` button and then select `Copy channel ID`.
+Validation and packaging:
 
-![](Sources/com.nefrit.youtube.sdPlugin/screenshot2.png)
+```bash
+npm run validate
+npm run pack
+```
 
-## Stream
+## Project Structure
 
-- You have two options
-  - Link YouTube stream (ex: `https://www.youtube.com/watch?v=Yr_7sd3x-cQ`)
-  - Link YouTube stream id: `v=Yr_7sd3x-cQ`
+- `src/` - TypeScript source code
+- `com.nefrit.youtube.sdPlugin/` - distributable plugin bundle
+- `prepare-runtime.js` - copies required runtime dependencies into bundle
 
-# About author
+## About Author
 
-You can get in touch with me through any of the following methods:
+- Email: `artem.nefrit@gmail.com`
+- GitHub: https://github.com/ArtemNeFRiT
+- Instagram: https://instagram.com/artem_nefrit?igshid=MjEwN2IyYWYwYw
+- LinkedIn: https://www.linkedin.com/in/artem-nefrit-a92851273/
 
-- artem.nefrit@gmail.com
-
-- [Github](https://github.com/ArtemNeFRiT)
-
-- [Instagram](https://instagram.com/artem_nefrit?igshid=MjEwN2IyYWYwYw)
-
-- [LinkedIn](https://www.linkedin.com/in/artem-nefrit-a92851273/)
-
-
-# Donation
+## Donation
 
 https://www.donationalerts.com/r/artemnefrit

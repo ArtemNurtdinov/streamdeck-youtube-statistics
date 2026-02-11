@@ -1,0 +1,5 @@
+{
+  "name": "com.nefrit.youtube.runtime",
+  "private": true,
+  "type": "module"
+}

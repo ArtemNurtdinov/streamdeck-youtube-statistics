@@ -1,1 +1,4 @@
 .idea
+node_modules/
+com.nefrit.youtube.sdPlugin/node_modules/
+com.nefrit.youtube.sdPlugin/bin/

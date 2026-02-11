@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name=viewport
+          content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,minimal-ui,viewport-fit=cover">
+    <meta name=apple-mobile-web-app-capable content=yes>
+    <meta name=apple-mobile-web-app-status-bar-style content=black>
+    <title>Property Inspector Samples PI</title>
+    <link rel="stylesheet" href="./libs/css/sdpi.css">
+
+    <style>
+        .sdpi-item {
+            -webkit-user-drag: element;
+        }
+
+        .spacer {
+            width: 100%;
+            height: 400px;
+        }
+
+        .sdpi-item[type='range'] {
+            align-items: center;
+        }
+    </style>
+
+</head>
+<body>
+
+<div class="sdpi-wrapper">
+
+    <div class="sdpi-item">
+        <div class="sdpi-item-label">API Key</div>
+        <input class="sdpi-item-value" type="text" id="apiKey" value="" placeholder="Enter youtube API key">
+    </div>
+
+    <div class="sdpi-item">
+        <div class="sdpi-item-label">Period (minutes)</div>
+        <input class="sdpi-item-value" type="text" id="period" value="" placeholder="Update period (5 by default)">
+    </div>
+
+    <div class="sdpi-item" id="youtubeVideoInputView">
+        <div class="sdpi-item-label">Video</div>
+        <input class="sdpi-item-value" type="text" id="youtubeVideo" value=""
+               placeholder="Enter youtube video (url or id)">
+    </div>
+    <div class="sdpi-item" id="youtubeVideoButtonView">
+        <div class="sdpi-item-label empty"></div>
+        <button type="button" class="sdpi-item-value" id="saveVideoButton">Save</button>
+    </div>
+
+    <div class="sdpi-item" id="youtubeChannelInputView">
+        <div class="sdpi-item-label">Channel ID</div>
+        <input class="sdpi-item-value" type="text" id="youtubeChannelId" value=""
+               placeholder="Enter youtube channel ID">
+    </div>
+    <div class="sdpi-item" id="youtubeChannelButtonView">
+        <div class="sdpi-item-label empty"></div>
+        <button type="button" class="sdpi-item-value" id="saveChannelButton">Save</button>
+    </div>
+
+    <div class="sdpi-item" id="youtubeStreamInputView">
+        <div class="sdpi-item-label">Stream</div>
+        <input class="sdpi-item-value" type="text" id="youtubeStream" value=""
+               placeholder="Enter youtube stream (url or id)">
+    </div>
+    <div class="sdpi-item" id="youtubeStreamButtonView">
+        <div class="sdpi-item-label empty"></div>
+        <button type="button" class="sdpi-item-value" id="saveStreamButton">Save</button>
+    </div>
+
+    <div class="sdpi-item">
+        <div class="sdpi-item-label empty"></div>
+        <div class="sdpi-item-value">
+            <a id="documentationLink">Learn how to use this plugin</a>
+        </div>
+    </div>
+
+</div>
+
+<script src="libs/js/constants.js"></script>
+<script src="libs/js/events.js"></script>
+<script src="libs/js/api.js"></script>
+<script src="libs/js/property-inspector.js"></script>
+<script src="libs/js/dynamic-styles.js"></script>
+<script src="libs/js/action.js"></script>
+<script src="index_pi.js"></script>
+
+</body>
+
+</html>
