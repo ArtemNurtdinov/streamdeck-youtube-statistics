@@ -42,7 +42,7 @@
     },
     {
       "Icon": "assets/actionVideoViewsIcon",
-      "Name": "Last video views",
+      "Name": "Latest video views",
       "States": [
         {
           "Image": "assets/actionIcon",
@@ -55,7 +55,7 @@
     },
     {
       "Icon": "assets/actionLikesIcon",
-      "Name": "Last video likes",
+      "Name": "Latest video likes",
       "States": [
         {
           "Image": "assets/actionIcon",
@@ -68,7 +68,7 @@
     },
     {
       "Icon": "assets/actionCommentsIcon",
-      "Name": "Last video comments",
+      "Name": "Latest video comments",
       "States": [
         {
           "Image": "assets/actionIcon",
