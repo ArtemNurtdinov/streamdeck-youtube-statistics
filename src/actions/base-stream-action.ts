@@ -4,7 +4,7 @@ import { YoutubeService } from "../services/youtubeService.js";
 import type { StreamStat } from "../types/stats.js";
 import type { StreamSettings } from "../types/settings.js";
 import { formatNumber } from "../utils/formatNumber.js";
-import { getYouTubeStreamUrl } from "../utils/youtubeUrls.js";
+import { getYouTubeChannelUrl } from "../utils/youtubeUrls.js";
 
 export abstract class BaseStreamAction extends BaseStatAction<StreamSettings> {
     constructor(private readonly youtube: YoutubeService = new YoutubeService()) {
@@ -13,22 +13,22 @@ export abstract class BaseStreamAction extends BaseStatAction<StreamSettings> {
 
     protected override async updateTitle(action: KeyAction<StreamSettings>, settings: StreamSettings): Promise<void> {
         const apiKey = settings.apiKey?.trim();
-        const stream = settings.youtubeStream?.trim();
-        if (!apiKey || !stream) {
+        const channelId = settings.youtubeChannelId?.trim();
+        if (!apiKey || !channelId) {
             await this.setActionTitle(action, "");
             return;
         }
 
-        const stat = await this.youtube.loadStreamStat(apiKey, stream);
-        await this.setActionTitle(action, formatNumber(this.getStreamValue(stat)));
+        const activeStream = await this.youtube.loadActiveStreamByChannel(apiKey, channelId);
+        await this.setActionTitle(action, formatNumber(this.getStreamValue(activeStream.stat)));
     }
 
     protected override getActionUrl(settings: StreamSettings): string | null {
-        const stream = settings.youtubeStream?.trim();
-        if (!stream) {
+        const channelId = settings.youtubeChannelId?.trim();
+        if (!channelId) {
             return null;
         }
-        return getYouTubeStreamUrl(stream);
+        return getYouTubeChannelUrl(channelId);
     }
 
     protected abstract getStreamValue(stat: StreamStat): string;

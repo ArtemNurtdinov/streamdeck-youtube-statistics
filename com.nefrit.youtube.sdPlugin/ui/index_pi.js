@@ -105,8 +105,8 @@ function initPropertyInspector() {
     if (isStreamAction) {
         document.getElementById("youtubeVideoInputView").style.display = "none"
         document.getElementById("youtubeVideoButtonView").style.display = "none"
-        document.getElementById("youtubeChannelInputView").style.display = "none"
-        document.getElementById("youtubeChannelButtonView").style.display = "none"
+        document.getElementById("youtubeStreamInputView").style.display = "none"
+        document.getElementById("youtubeStreamButtonView").style.display = "none"
     }
 }
 

@@ -12,5 +12,5 @@ export type ChannelSettings = CommonSettings & {
 };
 
 export type StreamSettings = CommonSettings & {
-    youtubeStream?: string;
+    youtubeChannelId?: string;
 };

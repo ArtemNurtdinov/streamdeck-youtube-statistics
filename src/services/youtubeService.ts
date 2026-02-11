@@ -41,6 +41,14 @@ type StreamStatisticsResponse = YouTubeError & {
     }>;
 };
 
+type LiveStreamSearchResponse = YouTubeError & {
+    items?: Array<{
+        id?: {
+            videoId?: string;
+        };
+    }>;
+};
+
 type LatestVideoSearchResponse = YouTubeError & {
     items?: Array<{
         id?: {
@@ -51,6 +59,11 @@ type LatestVideoSearchResponse = YouTubeError & {
 
 export type LatestVideoStat = VideoStat & {
     videoId: string;
+};
+
+export type ActiveStreamStat = {
+    streamId?: string;
+    stat: StreamStat;
 };
 
 export class YoutubeService {
@@ -102,6 +115,31 @@ export class YoutubeService {
             actualStartTime: result.actualStartTime,
             activeLiveChatId: result.activeLiveChatId,
         };
+    }
+
+    async loadActiveStreamByChannel(apiKey: string, channelId: string): Promise<ActiveStreamStat> {
+        const url = `https://www.googleapis.com/youtube/v3/search?part=id&channelId=${encodeURIComponent(channelId)}&eventType=live&type=video&maxResults=1&key=${encodeURIComponent(apiKey)}`;
+        const response = await this.fetchJSON<LiveStreamSearchResponse>(url);
+        const streamId = response.items?.[0]?.id?.videoId;
+        if (!streamId) {
+            return {
+                stat: {
+                    concurrentViewers: "0",
+                },
+            };
+        }
+
+        try {
+            const stat = await this.loadStreamStat(apiKey, streamId);
+            return { streamId, stat };
+        } catch {
+            return {
+                streamId,
+                stat: {
+                    concurrentViewers: "0",
+                },
+            };
+        }
     }
 
     async loadLatestVideo(apiKey: string, channelId: string): Promise<LatestVideoStat> {
