@@ -77,15 +77,13 @@ export class YoutubeService {
     private readonly latestVideoCache = new Map<string, { videoId: string; cachedAt: number }>();
     private readonly activeStreamCache = new Map<string, { streamId: string | null; cachedAt: number }>();
 
-    private isCacheValid<T>(entry: { cachedAt: number } | undefined, ttlMs: number): entry is T {
+    private isCacheValid(entry: { cachedAt: number } | undefined, ttlMs: number): boolean {
         return entry != null && Date.now() - entry.cachedAt < ttlMs;
     }
 
     private getCachedLatestVideoId(channelId: string): string | undefined {
         const entry = this.latestVideoCache.get(channelId);
-        return this.isCacheValid<{ videoId: string; cachedAt: number }>(entry, LATEST_VIDEO_CACHE_TTL_MS)
-            ? entry.videoId
-            : undefined;
+        return entry != null && this.isCacheValid(entry, LATEST_VIDEO_CACHE_TTL_MS) ? entry.videoId : undefined;
     }
 
     private setCachedLatestVideoId(channelId: string, videoId: string): void {
@@ -96,9 +94,7 @@ export class YoutubeService {
         const entry = this.activeStreamCache.get(channelId);
         if (entry == null) return undefined;
         const ttlMs = entry.streamId == null ? ACTIVE_STREAM_CACHE_TTL_MS_EMPTY : ACTIVE_STREAM_CACHE_TTL_MS_LIVE;
-        if (!this.isCacheValid<{ streamId: string | null; cachedAt: number }>(entry, ttlMs)) {
-            return undefined;
-        }
+        if (!this.isCacheValid(entry, ttlMs)) return undefined;
         return { streamId: entry.streamId };
     }
 
