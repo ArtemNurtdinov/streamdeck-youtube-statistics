@@ -68,8 +68,10 @@ export type ActiveStreamStat = {
 
 /** TTL for cached "latest video" id per channel (90 min). */
 const LATEST_VIDEO_CACHE_TTL_MS = 90 * 60 * 1000;
-/** TTL for cached "active stream" id per channel (3 min — stream can end). */
-const ACTIVE_STREAM_CACHE_TTL_MS = 3 * 60 * 1000;
+/** TTL for cached "no active stream" (30 min — re-check to discover new stream). */
+const ACTIVE_STREAM_CACHE_TTL_MS_EMPTY = 30 * 60 * 1000;
+/** TTL for cached "active stream" id (90 min — stream is live, save quota). */
+const ACTIVE_STREAM_CACHE_TTL_MS_LIVE = 90 * 60 * 1000;
 
 export class YoutubeService {
     private readonly latestVideoCache = new Map<string, { videoId: string; cachedAt: number }>();
@@ -92,7 +94,9 @@ export class YoutubeService {
 
     private getCachedActiveStreamId(channelId: string): { streamId: string | null } | undefined {
         const entry = this.activeStreamCache.get(channelId);
-        if (!this.isCacheValid<{ streamId: string | null; cachedAt: number }>(entry, ACTIVE_STREAM_CACHE_TTL_MS)) {
+        if (entry == null) return undefined;
+        const ttlMs = entry.streamId == null ? ACTIVE_STREAM_CACHE_TTL_MS_EMPTY : ACTIVE_STREAM_CACHE_TTL_MS_LIVE;
+        if (!this.isCacheValid<{ streamId: string | null; cachedAt: number }>(entry, ttlMs)) {
             return undefined;
         }
         return { streamId: entry.streamId };
