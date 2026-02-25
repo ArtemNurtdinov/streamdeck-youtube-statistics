@@ -1,3 +1,4 @@
+import streamDeck from "@elgato/streamdeck";
 import type { ChannelStat, StreamStat, VideoStat } from "../types/stats.js";
 import { extractStreamId, extractVideoId } from "../utils/youtubeUrls.js";
 
@@ -157,11 +158,14 @@ export class YoutubeService {
         let streamId: string | null;
         if (cached !== undefined) {
             streamId = cached.streamId;
+            streamDeck.logger.info(`[YouTube cache] active stream HIT channelId=${channelId} streamId=${streamId ?? "none"}`);
         } else {
+            streamDeck.logger.info(`[YouTube cache] active stream MISS channelId=${channelId}, calling search.list`);
             const url = `https://www.googleapis.com/youtube/v3/search?part=id&channelId=${encodeURIComponent(channelId)}&eventType=live&type=video&maxResults=1&key=${encodeURIComponent(apiKey)}`;
             const response = await this.fetchJSON<LiveStreamSearchResponse>(url);
             streamId = response.items?.[0]?.id?.videoId ?? null;
             this.setCachedActiveStreamId(channelId, streamId);
+            streamDeck.logger.info(`[YouTube cache] active stream cached channelId=${channelId} streamId=${streamId ?? "none"}`);
         }
 
         if (!streamId) {
@@ -189,6 +193,7 @@ export class YoutubeService {
     async loadLatestVideo(apiKey: string, channelId: string): Promise<LatestVideoStat> {
         let videoId = this.getCachedLatestVideoId(channelId);
         if (videoId == null) {
+            streamDeck.logger.info(`[YouTube cache] latest video MISS channelId=${channelId}, calling search.list`);
             const latestVideoUrl = `https://www.googleapis.com/youtube/v3/search?part=id&channelId=${encodeURIComponent(channelId)}&maxResults=1&order=date&type=video&key=${encodeURIComponent(apiKey)}`;
             const latestVideoResponse = await this.fetchJSON<LatestVideoSearchResponse>(latestVideoUrl);
             videoId = latestVideoResponse.items?.[0]?.id?.videoId;
@@ -196,6 +201,9 @@ export class YoutubeService {
                 throw new Error("Latest video not found for this channel.");
             }
             this.setCachedLatestVideoId(channelId, videoId);
+            streamDeck.logger.info(`[YouTube cache] latest video cached channelId=${channelId} videoId=${videoId}`);
+        } else {
+            streamDeck.logger.info(`[YouTube cache] latest video HIT channelId=${channelId} videoId=${videoId}`);
         }
 
         const stat = await this.loadVideoStat(apiKey, videoId);
