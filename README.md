@@ -26,6 +26,11 @@ With this plugin you can track:
 
 ## Changes
 
+### 1.3.1
+
+- **Fixed** exceeding the daily YouTube Data API quota.
+- **Added** caching for `search.list` results to reduce quota usage
+
 ### 1.3.0
 
 - Migrated plugin runtime to Stream Deck SDK v2 with TypeScript.

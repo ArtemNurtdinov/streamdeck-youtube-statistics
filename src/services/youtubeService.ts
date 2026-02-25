@@ -1,3 +1,4 @@
+import streamDeck from "@elgato/streamdeck";
 import type { ChannelStat, StreamStat, VideoStat } from "../types/stats.js";
 import { extractStreamId, extractVideoId } from "../utils/youtubeUrls.js";
 
@@ -66,7 +67,42 @@ export type ActiveStreamStat = {
     stat: StreamStat;
 };
 
+/** TTL for cached "latest video" id per channel (90 min). */
+const LATEST_VIDEO_CACHE_TTL_MS = 90 * 60 * 1000;
+/** TTL for cached "no active stream" (30 min — re-check to discover new stream). */
+const ACTIVE_STREAM_CACHE_TTL_MS_EMPTY = 30 * 60 * 1000;
+/** TTL for cached "active stream" id (90 min — stream is live, save quota). */
+const ACTIVE_STREAM_CACHE_TTL_MS_LIVE = 90 * 60 * 1000;
+
 export class YoutubeService {
+    private readonly latestVideoCache = new Map<string, { videoId: string; cachedAt: number }>();
+    private readonly activeStreamCache = new Map<string, { streamId: string | null; cachedAt: number }>();
+
+    private isCacheValid(entry: { cachedAt: number } | undefined, ttlMs: number): boolean {
+        return entry != null && Date.now() - entry.cachedAt < ttlMs;
+    }
+
+    private getCachedLatestVideoId(channelId: string): string | undefined {
+        const entry = this.latestVideoCache.get(channelId);
+        return entry != null && this.isCacheValid(entry, LATEST_VIDEO_CACHE_TTL_MS) ? entry.videoId : undefined;
+    }
+
+    private setCachedLatestVideoId(channelId: string, videoId: string): void {
+        this.latestVideoCache.set(channelId, { videoId, cachedAt: Date.now() });
+    }
+
+    private getCachedActiveStreamId(channelId: string): { streamId: string | null } | undefined {
+        const entry = this.activeStreamCache.get(channelId);
+        if (entry == null) return undefined;
+        const ttlMs = entry.streamId == null ? ACTIVE_STREAM_CACHE_TTL_MS_EMPTY : ACTIVE_STREAM_CACHE_TTL_MS_LIVE;
+        if (!this.isCacheValid(entry, ttlMs)) return undefined;
+        return { streamId: entry.streamId };
+    }
+
+    private setCachedActiveStreamId(channelId: string, streamId: string | null): void {
+        this.activeStreamCache.set(channelId, { streamId, cachedAt: Date.now() });
+    }
+
     async loadVideoStat(apiKey: string, videoInput: string): Promise<VideoStat> {
         const videoId = extractVideoId(videoInput);
         const url = `https://www.googleapis.com/youtube/v3/videos?part=statistics&id=${encodeURIComponent(videoId)}&key=${encodeURIComponent(apiKey)}`;
@@ -118,9 +154,20 @@ export class YoutubeService {
     }
 
     async loadActiveStreamByChannel(apiKey: string, channelId: string): Promise<ActiveStreamStat> {
-        const url = `https://www.googleapis.com/youtube/v3/search?part=id&channelId=${encodeURIComponent(channelId)}&eventType=live&type=video&maxResults=1&key=${encodeURIComponent(apiKey)}`;
-        const response = await this.fetchJSON<LiveStreamSearchResponse>(url);
-        const streamId = response.items?.[0]?.id?.videoId;
+        const cached = this.getCachedActiveStreamId(channelId);
+        let streamId: string | null;
+        if (cached !== undefined) {
+            streamId = cached.streamId;
+            streamDeck.logger.info(`[YouTube cache] active stream HIT channelId=${channelId} streamId=${streamId ?? "none"}`);
+        } else {
+            streamDeck.logger.info(`[YouTube cache] active stream MISS channelId=${channelId}, calling search.list`);
+            const url = `https://www.googleapis.com/youtube/v3/search?part=id&channelId=${encodeURIComponent(channelId)}&eventType=live&type=video&maxResults=1&key=${encodeURIComponent(apiKey)}`;
+            const response = await this.fetchJSON<LiveStreamSearchResponse>(url);
+            streamId = response.items?.[0]?.id?.videoId ?? null;
+            this.setCachedActiveStreamId(channelId, streamId);
+            streamDeck.logger.info(`[YouTube cache] active stream cached channelId=${channelId} streamId=${streamId ?? "none"}`);
+        }
+
         if (!streamId) {
             return {
                 stat: {
@@ -133,6 +180,7 @@ export class YoutubeService {
             const stat = await this.loadStreamStat(apiKey, streamId);
             return { streamId, stat };
         } catch {
+            this.setCachedActiveStreamId(channelId, null);
             return {
                 streamId,
                 stat: {
@@ -143,11 +191,19 @@ export class YoutubeService {
     }
 
     async loadLatestVideo(apiKey: string, channelId: string): Promise<LatestVideoStat> {
-        const latestVideoUrl = `https://www.googleapis.com/youtube/v3/search?part=id&channelId=${encodeURIComponent(channelId)}&maxResults=1&order=date&type=video&key=${encodeURIComponent(apiKey)}`;
-        const latestVideoResponse = await this.fetchJSON<LatestVideoSearchResponse>(latestVideoUrl);
-        const videoId = latestVideoResponse.items?.[0]?.id?.videoId;
-        if (!videoId) {
-            throw new Error("Latest video not found for this channel.");
+        let videoId = this.getCachedLatestVideoId(channelId);
+        if (videoId == null) {
+            streamDeck.logger.info(`[YouTube cache] latest video MISS channelId=${channelId}, calling search.list`);
+            const latestVideoUrl = `https://www.googleapis.com/youtube/v3/search?part=id&channelId=${encodeURIComponent(channelId)}&maxResults=1&order=date&type=video&key=${encodeURIComponent(apiKey)}`;
+            const latestVideoResponse = await this.fetchJSON<LatestVideoSearchResponse>(latestVideoUrl);
+            videoId = latestVideoResponse.items?.[0]?.id?.videoId;
+            if (!videoId) {
+                throw new Error("Latest video not found for this channel.");
+            }
+            this.setCachedLatestVideoId(channelId, videoId);
+            streamDeck.logger.info(`[YouTube cache] latest video cached channelId=${channelId} videoId=${videoId}`);
+        } else {
+            streamDeck.logger.info(`[YouTube cache] latest video HIT channelId=${channelId} videoId=${videoId}`);
         }
 
         const stat = await this.loadVideoStat(apiKey, videoId);
